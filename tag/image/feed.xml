@@ -9,14 +9,14 @@
 
   <channel>
     <title>
-      <![CDATA[  Franklin Template  ]]>
+      <![CDATA[  智慧能源系统导论  ]]>
     </title>
-    <link> https://tlienart.github.io/FranklinTemplates.jl/ </link>
+    <link> https://enpo811203.ai4energy.org/ </link>
     <description>
-      <![CDATA[  Example website using Franklin  ]]>
+      <![CDATA[  综合能源系统建模、仿真、优化与控制课程网站  ]]>
     </description>
     <atom:link
-      href="https://tlienart.github.io/FranklinTemplates.jl/feed.xml"
+      href="https://enpo811203.ai4energy.org/feed.xml"
       rel="self"
       type="application/rss+xml" />
 
@@ -35,7 +35,7 @@
   
   
   <atom:author>
-    <atom:name>Septimia Zenobia</atom:name>
+    <atom:name>Mingtao Li</atom:name>
   </atom:author>
         
 </item>
