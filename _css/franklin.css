@@ -256,7 +256,9 @@ td {
     KATEX
 ================================================================== */
 
-body { counter-reset: eqnum; }
+body {
+  font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, 'Microsoft YaHei', 'Songti SC', SimSun, Heiti, sans-serif;
+  counter-reset: eqnum; }  
 
 .katex { font-size: 1em !important; }
 
