@@ -9,7 +9,7 @@
 
 {{bilibili VSCode的安装}}
 
-{{bilibili Windows Terminal的安装}}
+{{bilibili WindowsTerminal的安装}}
 
 {{bilibili msys2的安装}}
 
