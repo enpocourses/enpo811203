@@ -1,4 +1,4 @@
-Sitemap: https://enpo811203.ai4energy.org/sitemap.xml
+Sitemap: https://ai4energy.github.io/enpo811203/sitemap.xml
 
 User-agent: *
 Disallow:
