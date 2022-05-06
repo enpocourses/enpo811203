@@ -3,9 +3,9 @@
 # LearnDocs
 
 !!! tip  
-    [文档连接，持续更新中......](https://jake484.github.io/LearnDocs/dev/)
+    [文档连接，持续更新中......](https://ai4energy.github.io/LearnDocs/dev/)
 
-    [备用地址](https://ai4energy.github.io/LearnDocs/dev/)
+    [更新中主站](https://jake484.github.io/LearnDocs/dev/)
 
 ## LearnDocs简介
 
