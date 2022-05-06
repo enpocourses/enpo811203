@@ -1,7 +1,7 @@
 @def title = "一些典型的环境设置"
 @def tags = ["vscode", "julia", "windows terminal", "clion"]
 
-# 一些典型的环境设置
+# 一些典型环境的设置
 
 ## Julia的安装
 
