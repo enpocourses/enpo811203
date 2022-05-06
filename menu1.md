@@ -1,84 +1,52 @@
-+++
-title = "Code blocks"
-hascode = true
-date = Date(2019, 3, 22)
-rss = "A short description of the page which would serve as **blurb** in a `RSS` feed; you can use basic markdown here but the whole description string must be a single line (not a multiline string). Like this one for instance. Keep in mind that styling is minimal in RSS so for instance don't expect maths or fancy styling to work; images should be ok though: ![](https://upload.wikimedia.org/wikipedia/en/3/32/Rick_and_Morty_opening_credits.jpeg)"
-+++
-@def tags = ["syntax", "code"]
+@def title = "LearnDocs"
 
-# Working with code blocks
+# LearnDocs
 
-\toc
+!!! tip  
+    [文档连接，持续更新中......](https://jake484.github.io/LearnDocs/dev/)
 
-## Live evaluation of code blocks
+    [备用地址](https://ai4energy.github.io/LearnDocs/dev/)
 
-If you would like to show code as well as what the code outputs, you only need to specify where the script corresponding to the code block will be saved.
+## LearnDocs简介
 
-Indeed, what happens is that the code block gets saved as a script which then gets executed.
-This also allows for that block to not be re-executed every time you change something _else_ on the page.
+LearnDocs是Ai4小组在学习中整理的一些可操作案例。案例的核心主要与建模仿真优化控制相关。文档主要特点为：
 
-Here's a simple example (change values in `a` to see the results being live updated):
+* 既有数学层面的探究，也包含了应用层面的案例。
+* 包含大量Julia生态中软件包的使用
+* 兼顾建模仿真优化控制核心与拓展
+* 分享对理论抽象问题的认识
+* 分享软件使用过程中的技巧
+* 分享踩坑的心路历程与对库使用的理解
 
-```julia:./exdot.jl
-using LinearAlgebra
-a = [1, 2, 3, 3, 4, 5, 2, 2]
-@show dot(a, a)
-println(dot(a, a))
-```
+供大家学习参考。
 
-You can now show what this would look like:
+欢迎各位贡献文档！
 
-\output{./exdot.jl}
+![Stable](https://img.shields.io/badge/Docs-Updating...-blue.svg?style=flat-square) ![Stable](https://img.shields.io/badge/Articles-Total_23-green.svg?style=flat-square)
 
-**Notes**:
-* you don't have to specify the `.jl` (see below),
-* you do need to explicitly use print statements or `@show` for things to show, so just leaving a variable at the end like you would in the REPL will show nothing,
-* only Julia code blocks are supported at the moment, there may be a support for scripting languages like `R` or `python` in the future,
-* the way you specify the path is important; see [the docs](https://tlienart.github.io/franklindocs/code/index.html#more_on_paths) for more info. If you don't care about how things are structured in your `/assets/` folder, just use `./scriptname.jl`. If you want things to be grouped, use `./group/scriptname.jl`. For more involved uses, see the docs.
+## Julia资源传送门
 
-Lastly, it's important to realise that if you don't change the content of the code, then that code will only be executed _once_ even if you make multiple changes to the text around it.
+1. [Julia中文文档](https://cn.julialang.org/)
+2. [Julia官方文档](https://julialang.org/)
+3. [Sciml总站](https://sciml.ai/)
+4. [ModelingToolkit.jl](https://mtk.sciml.ai/stable/)（符号建模包）
+5. [DifferentialEquations.jl](https://diffeq.sciml.ai/dev/)（常微分方程求解包）
+6. [NeuralPDE.jl](https://neuralpde.sciml.ai/stable/)（偏微分方程求解包）
+7. [Symbolics.jl](https://symbolics.juliasymbolics.org/dev/)（MTK依赖的符号求解包）
+8. [JuMP.jl](https://jump.dev/JuMP.jl/stable/)（优化求解器包）
+9. [DiffEqParamEstim.jl](https://diffeqparamestim.sciml.ai/dev/)（基于DE的参数辨识包）
+10. [Plots.ji](https://docs.juliaplots.org/dev/)（可视化包）
+11. [CSV.jl](https://csv.juliadata.org/stable/)
+12. [DataFrames.jl](https://dataframes.juliadata.org/stable/)（大规模数据批量处理包）
+13. [Unitful](https://painterqubits.github.io/Unitful.jl/stable/)（单位计算包）
+14. [GalacticOptim.jl](https://galacticoptim.sciml.ai/dev/)(Sciml优化包)
+15. 
 
-Here's another example,
+## 其它资源传送门
 
-```julia:./code/ex2
-for i ∈ 1:5, j ∈ 1:5
-    print(" ", rpad("*"^i,5), lpad("*"^(6-i),5), j==5 ? "\n" : " "^4)
-end
-```
-
-which gives the (utterly useless):
-
-\output{./code/ex2}
-
-note the absence of `.jl`, it's inferred.
-
-You can also hide lines (that will be executed nonetheless):
-
-```julia:./code/ex3
-using Random
-Random.seed!(1) # hide
-@show randn(2)
-```
-
-\output{./code/ex3}
-
-
-## Including scripts
-
-Another approach is to include the content of a script that has already been executed.
-This can be an alternative to the description above if you'd like to only run the code once because it's particularly slow or because it's not Julia code.
-For this you can use the `\input` command specifying which language it should be tagged as:
-
-
-\input{julia}{/_assets/scripts/script1.jl} <!--_-->
-
-
-these scripts can be run in such a way that their output is also saved to file, see `scripts/generate_results.jl` for instance, and you can then also input the results:
-
-\output{/_assets/scripts/script1.jl} <!--_-->
-
-which is convenient if you're presenting code.
-
-**Note**: paths specification matters, see [the docs](https://tlienart.github.io/franklindocs/code/index.html#more_on_paths) for details.
-
-Using this approach with the `generate_results.jl` file also makes sure that all the code on your website works and that all results match the code which makes maintenance easier.
+1. [CoolProp](http://www.coolprop.org/index.html)
+2. [APMonitor-github](https://github.com/APMonitor/)
+3. [APMonitor](http://apmonitor.com/)
+4. [Greet](https://greet.es.anl.gov/)
+5. [Mqtt系列教程](https://www.hangge.com/blog/cache/detail_2347.html)
+6. [Mixed Integer Distributed Ant Colony Optimization(midaco-solver)](http://www.midaco-solver.com/)
