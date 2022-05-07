@@ -1,6 +1,7 @@
 include("bilibilivideos.jl")
 
-
+const DATEFMT = dateformat"yyyy-mm-dd HH:MMp"
+const TZ = "Asia/Shanghai"
 
 function hfun_bar(vname)
   val = Meta.parse(vname[1])
@@ -18,7 +19,6 @@ function lx_baz(com, _)
   # do whatever you want here
   return uppercase(brace_content)
 end
-
 
 function hfun_bilibili(params)
   id = params[1]
