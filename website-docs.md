@@ -1,6 +1,6 @@
 # 课程网站文档
 
-本文档是[智慧能源实践之路课程](https://msoc.ai4energy.org)的网站说明。
+本文档是[智慧能源系统导论—综合能源系统建模、仿真、优化与控制课程](https://ai4energy.github.io/enpo811203/)的网站说明。
 
 网站的源代码在`website/` 目录。需要使用[Franklin.jl](https://franklinjl.org/)来生成网站的内容。
 

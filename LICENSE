@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2021 ai4energy
+Copyright (c) 2021 Ai4Energy Team of Xi'an Jiaotong Universiy
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+本软件版权由西安交通大学Ai4Energy小组所有
+
+特此向任何得到本软件拷贝及相关文档 ( 以下统称“本软件” ) 的人授权：被授权人有权使用、
+复制、修改、合并、发布、发行、再许可、售卖本软件拷贝、并有权向被供应人授予同等的权利，
+但必须满足以下条件：
+
+在本软件的所有副本或实质性使用中，都必须包含以上版权声明和本授权声明。 
+
+本软件是“按原样”提供的，不附带任何明示或暗示的保证，包括没有任何有关适销性、适用性、
+非侵权性保证以及其他保证。在任何情况下，作者或版权持有人，对任何权益追索、损害赔偿
+以及其他追责，都不负任何责任。无论这些追责产生自合同、侵权，还是直接或间接来自于本
+软件以及与本软件使用或经营有关的情形。
