@@ -93,7 +93,60 @@ int main()
 在Julia中，如果一个函数名以！结尾，表明它会改变输入参数的内容。而不带！的函数名，只是会有返回值，不会改变输入参数的值。
 
 - **函数并不一定有名字**
-lambda表达式
+
+可以认为，没有名字的函数可以使用一次，然后没法再次唤醒它。
+在一些语言中，没有名字的函数可以使用lambda表达式进行定义。比如scheme,
+```scheme
+(lambda (x) (+ x 2))
+```
+
+又比如python，
+```python
+lambda x: x+2
+```
+
+在javascript中则可以这样定义函数，
+```javascript
+x-> x+2
+```
+
+甚至，C++，
+```C++
+[](float x)->float{return x+2;};
+```
+
+没有名字有什么用呢？其实有的，比如在python中，可以使用map来调用一次，
+```python
+map(lambda x: x+2, [1,3,5,7])
+```
+
+比如scheme这样调用，
+```scheme
+((lambda (x) (+ x 2)) 4)
+```
+当然，javacript和c++也可以类似的对匿名函数进行使用。
+
+但是匿名函数使用一次，没法在想用的时候再次召唤出来。所以我们可以给它取个名字，就好比给锅安装了个柄，可以通过柄把锅抓住。
+
+如下的C++把匿名函数取了个名字addfunciton，并调用它，
+```C++
+auto addfunction=[](float x)->float{return x+2;};
+addfunction(3)
+```
+
+如下的python代码把匿名函数取了个名字add2，并调用它
+```python
+add2 = lambda x: x+2
+add2(3)
+
+如下的scheme代码把匿名函数取了个名字add2，并调用它
+```scheme
+(define add2
+  (lambda (x) (+ x 2)))
+(add2 3)
+```
+
+给函数取名，是因为我们要方便我们在需要的时候召唤它。
 
 - **加减乘除本质就是函数**
 parse，运算符与函数，前缀表达式与中缀表达式
