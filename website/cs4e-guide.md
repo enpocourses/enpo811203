@@ -288,16 +288,66 @@ class PySSC:
         else:
             print("Platform of type {} not supported for wind analyses.".format(sys.platform))
     ...
-    
+
     def version(self):
         self.pdll.ssc_version.restype = c_int
         return self.pdll.ssc_version()
 ```
 它首先根据你系统的不同，加载了对应的动态链接库，然后定义了version函数。你调用这个python版的version函数时，本质是执行了动态链接库中的ssc_version()函数。
 
+dll也可以被julia调用。以下这段文字直接复制自julia中文文档，
+>在数值计算领域，尽管有很多用 C 语言或 Fortran 写的高质量且成熟的库都可以用 Julia 重写，但为了便捷利用现有的 C 或 Fortran 代码，Julia 提供简洁且高效的调用方式。Julia 的哲学是 no boilerplate： Julia 可以直接调用 C/Fortran 的函数，不需要任何"胶水"代码，代码生成或其它编译过程 – 即使在交互式会话 (REPL/Jupyter notebook) 中使用也一样. 在 Julia 中，上述特性可以仅仅通过调用 ccall 实现，它的语法看起来就像是普通的函数调用。
 
+> 被调用的代码必须是一个共享库（.so, .dylib, .dll）。大多数 C 和 Fortran 库都已经是以共享库的形式发布的，但在用 GCC 或 Clang 编译自己的代码时，需要添加 -shared 和 -fPIC 编译器选项。由于 Julia 的 JIT 生成的机器码跟原生 C 代码的调用是一样，所以在 Julia 里调用 C/Fortran 库的额外开销与直接从 C 里调用是一样的。[1]
 
-，dll被julia调用，在fortran与c混合编程中`iso_c_binding`的桥梁作用
+> 可以通过元组 (:function, "library") 或 ("function", "library") 这两种形式来索引库中的函数，其中 function 是函数名，library 是库名。（特定平台/操作系统的）加载路径中可用的共享库将按名称解析。 也可以指定库的完整路径。
+
+> 可以单独使用函数名来代替元组（只用 :function 或 "function"）。在这种情况下，函数名在当前进程中进行解析。这一调用形式可用于调用 C 库函数、Julia 运行时中的函数或链接到 Julia 的应用程序中的函数。
+
+> 默认情况下，Fortran 编译器会进行名称修饰（例如，将函数名转换为小写或大写，通常会添加下划线），要通过 ccall 调用 Fortran 函数，传递的标识符必须与 Fortran 编译器名称修饰之后的一致。此外，在调用 Fortran 函数时，所有输入必须以指针形式传递，并已在堆或栈上分配内存。这不仅适用于通常是堆分配的数组及可变对象，而且适用于整数和浮点数等标量值，尽管这些值通常是栈分配的，且在使用 C 或 Julia 调用约定时通常是通过寄存器传递的。
+
+一个典型的例子如下：
+```julia
+using Compat
+const coolproplibrary = joinpath(@__DIR__, "./CoolProp.dll")
+
+function PropsSI(fluid::AbstractString, output::AbstractString)
+    val = ccall( (:Props1SI, coolproplibrary), Cdouble, (Cstring, Cstring), fluid, output)
+    if val == Inf
+        error("CoolProp: ", get_global_param_string("errstring"))
+    end
+    return val
+end
+```
+就是通过coolproplibrary标记这个dll文件，然后写一个PropsSI函数，内部调用Props1SI进行处理。
+
+在fortran与c混合编程中，过去进行混合语言编程是比较苦难的，现在随着Fortran标准的进一步发展，已经很简单了，使用`ISO_C_BINDING`，就好了，下面是https://github.com/OP-DSL/OPS 中的代码片段，
+
+```
+module OPS_Fortran_Declarations
+
+  use, intrinsic :: ISO_C_BINDING
+  ...
+  integer(c_int) :: OPS_READ = 1
+  integer(c_int) :: OPS_WRITE = 2
+  integer(c_int) :: OPS_RW = 3
+  integer(c_int) :: OPS_INC = 4
+  integer(c_int) :: OPS_MIN = 5
+  integer(c_int) :: OPS_MAX = 6
+  ...
+  subroutine ops_reduction_result_real_8 (reduction_handle, var)
+    use, intrinsic :: ISO_C_BINDING
+    type(ops_reduction) :: reduction_handle
+    real(8), dimension(:), target :: var
+
+    call ops_reduction_result_c (reduction_handle%reductionCptr, reduction_handle%reductionPtr%size, c_loc(var))
+  end subroutine ops_reduction_result_real_8
+  ...
+end module OPS_Fortran_Declarations
+```
+这段代码虽然不能直接就运行检查，但是启发我们，fortran和c互相调用，使用iso_c_binding就很简单了。
+
+小结一下，函数能跨语言调用，按照提供（要求）的方法就好。
 
 - **可执行程序就是个函数，但是函数参数的给定方式是命令行参数**
 c语言的命令行参数，fortran程序的命令行参数
