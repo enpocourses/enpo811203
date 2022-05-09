@@ -321,7 +321,7 @@ end
 ```
 就是通过coolproplibrary标记这个dll文件，然后写一个PropsSI函数，内部调用Props1SI进行处理。
 
-在fortran与c混合编程中，过去进行混合语言编程是比较苦难的，现在随着Fortran标准的进一步发展，已经很简单了，使用`ISO_C_BINDING`，就好了，下面是https://github.com/OP-DSL/OPS 中的代码片段，
+在fortran与c混合编程中，过去进行混合语言编程是比较麻烦的，现在随着Fortran标准的进一步发展，已经很简单了，使用`ISO_C_BINDING`，就好了，下面是https://github.com/OP-DSL/OPS 中的代码片段，
 
 ```
 module OPS_Fortran_Declarations
