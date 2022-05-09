@@ -13,7 +13,7 @@
 
 ## 函数
 
-有很多人说，计算机入门最合适的捷径就是编程。很多人的编程是从c语言开始的，一开始就陷入了printf的格式化输入里去。而我们这里高度概括的来讲讲。
+有很多人说，计算机入门最合适的捷径就是编程。很多人的编程是从c语言开始的，一开始就陷入了scanf/printf的格式化输入/输出里去。而我们这里高度概括的来讲讲。
 
 ### 编程就是写函数
 
@@ -321,7 +321,7 @@ end
 ```
 就是通过coolproplibrary标记这个dll文件，然后写一个PropsSI函数，内部调用Props1SI进行处理。
 
-在fortran与c混合编程中，过去进行混合语言编程是比较麻烦的，现在随着Fortran标准的进一步发展，已经很简单了，使用`ISO_C_BINDING`，就好了，下面是https://github.com/OP-DSL/OPS 中的代码片段，
+在fortran与c混合编程中，过去进行混合语言编程是比较麻烦的，现在随着Fortran标准的进一步发展，已经很简单了，使用`ISO_C_BINDING`，就好了，下面是<https://github.com/OP-DSL/OPS>中的代码片段，
 
 ```
 module OPS_Fortran_Declarations
@@ -345,7 +345,7 @@ module OPS_Fortran_Declarations
   ...
 end module OPS_Fortran_Declarations
 ```
-这段代码虽然不能直接就运行检查，但是启发我们，fortran和c互相调用，使用iso_c_binding就很简单了。
+这段代码虽然不能直接就运行检查，但是启发我们，fortran和c互相调用，使用`ISO_C_BINDING`就很简单了。
 
 小结一下，函数能跨语言调用，按照提供（要求）的方法就好。
 
