@@ -138,6 +138,7 @@ addfunction(3)
 ```python
 add2 = lambda x: x+2
 add2(3)
+```
 
 如下的scheme代码把匿名函数取了个名字add2，并调用它
 ```scheme
