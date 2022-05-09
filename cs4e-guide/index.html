@@ -139,12 +139,62 @@ Meta.show_sexpr(abc)</code></pre>
         <span class=hljs-keyword >else</span>:
             <span class=hljs-built_in >print</span>(<span class=hljs-string >&quot;Platform of type {} not supported for wind analyses.&quot;</span>.<span class=hljs-built_in >format</span>(sys.platform))
     ...
-    
+
     <span class=hljs-keyword >def</span> <span class="hljs-title function_">version</span>(<span class=hljs-params >self</span>):
         self.pdll.ssc_version.restype = c_int
         <span class=hljs-keyword >return</span> self.pdll.ssc_version()</code></pre>
 <p>它首先根据你系统的不同，加载了对应的动态链接库，然后定义了version函数。你调用这个python版的version函数时，本质是执行了动态链接库中的ssc_version&#40;&#41;函数。</p>
-<p>，dll被julia调用，在fortran与c混合编程中<code>iso_c_binding</code>的桥梁作用</p>
+<p>dll也可以被julia调用。以下这段文字直接复制自julia中文文档，</p>
+<blockquote>
+<p>在数值计算领域，尽管有很多用 C 语言或 Fortran 写的高质量且成熟的库都可以用 Julia 重写，但为了便捷利用现有的 C 或 Fortran 代码，Julia 提供简洁且高效的调用方式。Julia 的哲学是 no boilerplate： Julia 可以直接调用 C/Fortran 的函数，不需要任何&quot;胶水&quot;代码，代码生成或其它编译过程 – 即使在交互式会话 &#40;REPL/Jupyter notebook&#41; 中使用也一样. 在 Julia 中，上述特性可以仅仅通过调用 ccall 实现，它的语法看起来就像是普通的函数调用。</p>
+</blockquote>
+<blockquote>
+<p>被调用的代码必须是一个共享库（.so, .dylib, .dll）。大多数 C 和 Fortran 库都已经是以共享库的形式发布的，但在用 GCC 或 Clang 编译自己的代码时，需要添加 -shared 和 -fPIC 编译器选项。由于 Julia 的 JIT 生成的机器码跟原生 C 代码的调用是一样，所以在 Julia 里调用 C/Fortran 库的额外开销与直接从 C 里调用是一样的。&#91;1&#93;</p>
+</blockquote>
+<blockquote>
+<p>可以通过元组 &#40;:function, &quot;library&quot;&#41; 或 &#40;&quot;function&quot;, &quot;library&quot;&#41; 这两种形式来索引库中的函数，其中 function 是函数名，library 是库名。（特定平台/操作系统的）加载路径中可用的共享库将按名称解析。 也可以指定库的完整路径。</p>
+</blockquote>
+<blockquote>
+<p>可以单独使用函数名来代替元组（只用 :function 或 &quot;function&quot;）。在这种情况下，函数名在当前进程中进行解析。这一调用形式可用于调用 C 库函数、Julia 运行时中的函数或链接到 Julia 的应用程序中的函数。</p>
+</blockquote>
+<blockquote>
+<p>默认情况下，Fortran 编译器会进行名称修饰（例如，将函数名转换为小写或大写，通常会添加下划线），要通过 ccall 调用 Fortran 函数，传递的标识符必须与 Fortran 编译器名称修饰之后的一致。此外，在调用 Fortran 函数时，所有输入必须以指针形式传递，并已在堆或栈上分配内存。这不仅适用于通常是堆分配的数组及可变对象，而且适用于整数和浮点数等标量值，尽管这些值通常是栈分配的，且在使用 C 或 Julia 调用约定时通常是通过寄存器传递的。</p>
+</blockquote>
+<p>一个典型的例子如下：</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >using</span> Compat
+<span class=hljs-keyword >const</span> coolproplibrary = joinpath(<span class=hljs-meta >@__DIR__</span>, <span class=hljs-string >&quot;./CoolProp.dll&quot;</span>)
+
+<span class=hljs-keyword >function</span> PropsSI(fluid::<span class=hljs-built_in >AbstractString</span>, output::<span class=hljs-built_in >AbstractString</span>)
+    val = <span class=hljs-keyword >ccall</span>( (:Props1SI, coolproplibrary), <span class=hljs-built_in >Cdouble</span>, (<span class=hljs-built_in >Cstring</span>, <span class=hljs-built_in >Cstring</span>), fluid, output)
+    <span class=hljs-keyword >if</span> val == <span class=hljs-literal >Inf</span>
+        error(<span class=hljs-string >&quot;CoolProp: &quot;</span>, get_global_param_string(<span class=hljs-string >&quot;errstring&quot;</span>))
+    <span class=hljs-keyword >end</span>
+    <span class=hljs-keyword >return</span> val
+<span class=hljs-keyword >end</span></code></pre>
+<p>就是通过coolproplibrary标记这个dll文件，然后写一个PropsSI函数，内部调用Props1SI进行处理。</p>
+<p>在fortran与c混合编程中，过去进行混合语言编程是比较苦难的，现在随着Fortran标准的进一步发展，已经很简单了，使用<code>ISO_C_BINDING</code>，就好了，下面是https://github.com/OP-DSL/OPS 中的代码片段，</p>
+<pre><code class="julia hljs"><span class=hljs-keyword >module</span> OPS_Fortran_Declarations
+
+  use, intrinsic :: ISO_C_BINDING
+  ...
+  integer(c_int) :: OPS_READ = <span class=hljs-number >1</span>
+  integer(c_int) :: OPS_WRITE = <span class=hljs-number >2</span>
+  integer(c_int) :: OPS_RW = <span class=hljs-number >3</span>
+  integer(c_int) :: OPS_INC = <span class=hljs-number >4</span>
+  integer(c_int) :: OPS_MIN = <span class=hljs-number >5</span>
+  integer(c_int) :: OPS_MAX = <span class=hljs-number >6</span>
+  ...
+  subroutine ops_reduction_result_real_8 (reduction_handle, var)
+    use, intrinsic :: ISO_C_BINDING
+    type(ops_reduction) :: reduction_handle
+    real(<span class=hljs-number >8</span>), dimension(:), target :: var
+
+    call ops_reduction_result_c (reduction_handle%reductionCptr, reduction_handle%reductionPtr%size, c_loc(var))
+  <span class=hljs-keyword >end</span> subroutine ops_reduction_result_real_8
+  ...
+<span class=hljs-keyword >end</span> <span class=hljs-keyword >module</span> OPS_Fortran_Declarations</code></pre>
+<p>这段代码虽然不能直接就运行检查，但是启发我们，fortran和c互相调用，使用iso<em>c</em>binding就很简单了。</p>
+<p>小结一下，函数能跨语言调用，按照提供（要求）的方法就好。</p>
 <ul>
 <li><p><strong>可执行程序就是个函数，但是函数参数的给定方式是命令行参数</strong></p>
 
