@@ -25,4 +25,212 @@
 {
     fun1();
     <span class=hljs-keyword >return</span> <span class=hljs-number >0</span>;
-}</code></pre> <ul> <li><p><strong>函数可能会改变参数本身的内容，也可能不会</strong></p> </ul> <p>数学上的函数定义是这样的：给定一个集合A，对于集合X中的每一个元素x，在集合Y中都有唯一的一个元素y和x对应。</p> <p>事实上，编程中的函数，给定输入的参数x，执行一定的操作，但是这些操作不改变x，那么这样的函数是没有改变参数本身的内容。然而有的函数是会改变参数本身的内容的。比如给你一个数组，调用一个排序函数来排序，以原来的数组名返回排序之后的数组，其实就是改变了参数的内容。</p> <p>在fortran中，有subroutine和function之分，可以认为function就是纯的函数，而subroutine可以使用参数来承接函数调用之后对参数的改变。</p> <p>而在c中，如果我们写个交换函数swap，使用传地址的方式进行传参数，实际上也改变了参数本身的内容。</p> <p>在Julia中，如果一个函数名以！结尾，表明它会改变输入参数的内容。而不带！的函数名，只是会有返回值，不会改变输入参数的值。</p> <ul> <li><p><strong>函数并不一定有名字</strong></p> </ul> <p>lambda表达式</p> <ul> <li><p><strong>加减乘除本质就是函数</strong></p> </ul> <p>parse，运算符与函数，前缀表达式与中缀表达式 c&#43;&#43;的运算符重载，python的<strong>add</strong>，julia的Base.&#43;</p> <ul> <li><p><strong>主函数并不是必须的，但运行程序必须有个入口</strong></p> </ul> <p>julia的、python的、java的入口有什么差异</p> <ul> <li><p><strong>提供给函数的参数需要按约定好的要求</strong></p> </ul> <p>函数的参数</p> <ul> <li><p><strong>函数可以封装成库给别人调用，有动态库，有静态库</strong></p> </ul> <p>dll，lib，so，a，dylib，</p> <ul> <li><p><strong>函数能跨语言调用</strong></p> </ul> <p>dll被python调用，dll被julia调用，在fortran与c混合编程中iso<em>c</em>binding的桥梁作用</p> <ul> <li><p><strong>可执行程序就是个函数，但是函数参数的给定方式是命令行参数</strong></p> </ul> <p>c语言的命令行参数，fortran程序的命令行参数</p> <ul> <li><p><strong>程序执行时的环境变量也会影响函数的行为</strong></p> <li><p><strong>函数运行时的“环境”与闭包</strong></p> </ul> <p>，盗梦空间，打游戏的技能表，栈</p> <ul> <li><p><strong>事件驱动与死循环，服务程序</strong></p> <li><p>对死循环程序的控制，任务管理器与上帝之手</p> <li><p>操作系统就是最初的那个根函数</p> <li><p>c&#43;&#43;的函数模板与泛型编程</p> <li><p>动态类型语言与静态类型语言，及它们的互相靠拢</p> </ul> <p>python的类型提示</p> <h2 id="模型与符号"><a href="#模型与符号" class=header-anchor >模型与符号</a></h2> <ul> <li><p>从符号到模型与parser</p> <li><p>函数的调用就是用它来处理你的模型</p> <li><p>模型处理与代码生成</p> <li><p>编译器也是个函数</p> </ul> <p>c语言的编译过程，c编译到汇编，汇编编译到0101，链接，</p> <ul> <li><p>移植、平台与上层无关性</p> <li><p>make与makefile以及项目文件</p> <li><p>从make，到automake，configure，再到qmake，wmake，以及cmake</p> <li><p>cmake也是个函数</p> </ul> <h2 id="递归"><a href="#递归" class=header-anchor >递归</a></h2> <ul> <li><p>斐波拉契数列与递归</p> <li><p>递归与循环</p> <li><p>四则混合运算、表达式树与递归</p> </ul> <h2 id="交互式编程与解释器"><a href="#交互式编程与解释器" class=header-anchor >交互式编程与解释器</a></h2> <p>我们提交一个Add 3 4</p> <ul> <li><p>抽象语法树</p> <li><p>递归处理是解释器的处理办法</p> </ul> <h2 id="抽象与封装"><a href="#抽象与封装" class=header-anchor >抽象与封装</a></h2> <ul> <li><p>结构体，有理数的加减乘除</p> <li><p>结构体演变为类</p> <li><p>以类为基础的面向对象编程，封装，继承，多态</p> <li><p>算法的不依赖于具体的类型</p> </ul> <p>C&#43;&#43;的模板类 julia的参数类型</p> <ul> <li><p>java的java、class、jar</p> <li><p>julia的多重分发</p> <li><p>go的嵌入体</p> <li><p>库与头文件、包、模块</p> <li><p>软件包与生态</p> <li><p>名字空间</p> </ul> <h2 id="图形界面与低代码开发"><a href="#图形界面与低代码开发" class=header-anchor >图形界面与低代码开发</a></h2> <ul> <li><p>从gcc、gdb到IDE</p> <li><p>儿童编程Scratch与背后的code</p> </ul> <p>-从delphi、C#、QT到浏览器</p> <h2 id="如何进行进一步学习"><a href="#如何进行进一步学习" class=header-anchor >如何进行进一步学习</a></h2> <ul> <li><p>学习一门编程语言，掌握关键语言特性，忽略次要特性</p> <li><p>注意语言特有的那些区别于其他语言的地方</p> <li><p>编程与算法，sicp与leecode</p> <li><p>食材、调料与大餐</p> <li><p>搜索引擎、github</p> </ul> <h2 id="再看抽象与封装"><a href="#再看抽象与封装" class=header-anchor >再看抽象与封装</a></h2> <ul> <li><p>硬件的一层又一层抽象</p> <li><p>对用户友好与对机器友好</p> </ul> <p>从javascript到typescript 从0101到汇编到c，再到今天的高级语言</p> <ul> <li><p>软件的一层又一层抽象</p> </ul> <p>从ops说说计算方法与硬件无关性 DSL与库</p> <ul> <li><p>知识的结构</p> </ul> <p>欧几里得几何原本</p> <p>自然数的定义</p> <p>让我们谈谈lambda演算</p> <p>lisp的本质，xml，ant</p> <ul> <li><p>站在巨人的肩膀上</p> </ul> <h2 id="不是最后的最后"><a href="#不是最后的最后" class=header-anchor >不是最后的最后</a></h2> <p>吾生也有涯，而知也无涯</p> <p>知识在爆炸，与时俱进</p> <p>从下到上的学习与从上到下的做事，不同的阶段，框架与细节相结合</p> <p>学习与成功五要素，学习的能力、学习的驱动力、学习的路径、机缘、持续努力</p> <p>前进的方法：实践、认识、再实践、再认识</p> <div class=page-foot > <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Mingtao Li. Last modified: May 09, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> </div> <script src="/enpo811203/libs/pure/ui.min.js"></script>
+}</code></pre> <ul> <li><p><strong>函数可能会改变参数本身的内容，也可能不会</strong></p> </ul> <p>数学上的函数定义是这样的：给定一个集合A，对于集合X中的每一个元素x，在集合Y中都有唯一的一个元素y和x对应。</p> <p>事实上，编程中的函数，给定输入的参数x，执行一定的操作，但是这些操作不改变x，那么这样的函数是没有改变参数本身的内容。然而有的函数是会改变参数本身的内容的。比如给你一个数组，调用一个排序函数来排序，以原来的数组名返回排序之后的数组，其实就是改变了参数的内容。</p> <p>在fortran中，有subroutine和function之分，可以认为function就是纯的函数，而subroutine可以使用参数来承接函数调用之后对参数的改变。</p> <p>而在c中，如果我们写个交换函数swap，使用传地址的方式进行传参数，实际上也改变了参数本身的内容。</p> <p>在Julia中，如果一个函数名以！结尾，表明它会改变输入参数的内容。而不带！的函数名，只是会有返回值，不会改变输入参数的值。</p> <ul> <li><p><strong>函数并不一定有名字</strong></p> </ul> <p>可以认为，没有名字的函数可以使用一次，然后没法再次唤醒它。 在一些语言中，没有名字的函数可以使用lambda表达式进行定义。比如scheme,</p> <pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-built_in >lambda</span></span> (x) (<span class=hljs-name ><span class=hljs-built_in >+</span></span> x <span class=hljs-number >2</span>))</code></pre>
+<p>又比如python，</p>
+<pre><code class="python hljs"><span class=hljs-keyword >lambda</span> x: x+<span class=hljs-number >2</span></code></pre>
+<p>在javascript中则可以这样定义函数，</p>
+<pre><code class="javascript hljs">x-&gt; x+<span class=hljs-number >2</span></code></pre>
+<p>甚至，C&#43;&#43;，</p>
+<pre><code class="cpp hljs">[](<span class=hljs-type >float</span> x)-&gt;<span class=hljs-type >float</span>{<span class=hljs-keyword >return</span> x+<span class=hljs-number >2</span>;};</code></pre>
+<p>没有名字有什么用呢？其实有的，比如在python中，可以使用map来调用一次，</p>
+<pre><code class="python hljs"><span class=hljs-built_in >map</span>(<span class=hljs-keyword >lambda</span> x: x+<span class=hljs-number >2</span>, [<span class=hljs-number >1</span>,<span class=hljs-number >3</span>,<span class=hljs-number >5</span>,<span class=hljs-number >7</span>])</code></pre>
+<p>比如scheme这样调用，</p>
+<pre><code class="scheme hljs">((<span class=hljs-name ><span class=hljs-built_in >lambda</span></span> (x) (<span class=hljs-name ><span class=hljs-built_in >+</span></span> x <span class=hljs-number >2</span>)) <span class=hljs-number >4</span>)</code></pre>
+<p>当然，javacript和c&#43;&#43;也可以类似的对匿名函数进行使用。</p>
+<p>但是匿名函数使用一次，没法在想用的时候再次召唤出来。所以我们可以给它取个名字，就好比给锅安装了个柄，可以通过柄把锅抓住。</p>
+<p>如下的C&#43;&#43;把匿名函数取了个名字addfunciton，并调用它，</p>
+<pre><code class="cpp hljs"><span class=hljs-keyword >auto</span> addfunction=[](<span class=hljs-type >float</span> x)-&gt;<span class=hljs-type >float</span>{<span class=hljs-keyword >return</span> x+<span class=hljs-number >2</span>;};
+<span class=hljs-built_in >addfunction</span>(<span class=hljs-number >3</span>)</code></pre>
+<p>如下的python代码把匿名函数取了个名字add2，并调用它</p>
+<pre><code class="python hljs">add2 = <span class=hljs-keyword >lambda</span> x: x+<span class=hljs-number >2</span>
+add2(<span class=hljs-number >3</span>)</code></pre>
+<p>如下的scheme代码把匿名函数取了个名字add2，并调用它</p>
+<pre><code class="scheme hljs">(<span class=hljs-name ><span class=hljs-built_in >define</span></span> add2 (<span class=hljs-name ><span class=hljs-built_in >lambda</span></span> (x) (<span class=hljs-name ><span class=hljs-built_in >+</span></span> x <span class=hljs-number >2</span>)))  (<span class=hljs-name >add2</span> <span class=hljs-number >3</span>)</code></pre>
+<p>给函数取名，是因为我们要方便我们在需要的时候召唤它。</p>
+<ul>
+<li><p><strong>加减乘除本质就是函数</strong></p>
+
+</ul>
+<p>3&#43;4对应的scheme表达可以写成&#40;&#43; 3 4&#41;, 这里&#43;其实就是一个函数。所以说，加减乘除本质上就是函数。 我们甚至可以在julia的repl中这样操作，</p>
+<pre><code class="julia hljs">f=+
+f(<span class=hljs-number >2</span>,<span class=hljs-number >3</span>)</code></pre>
+<p>我们使用“3&#43;2”这样的表达式时，我们称呼这是中缀表达式。而如果我们按照scheme的写法，&#40;&#43; 3 2&#41;时，采用的是前缀表达。</p>
+<p>实际上，我们还可以走得更远一点，仍然在julia的repl中，</p>
+<pre><code class="julia hljs">abc = Meta.parse(<span class=hljs-string >&quot;3+2&quot;</span>)
+Meta.show_sexpr(abc)</code></pre>
+<p>来看看内部的代码表示。我们可以发现，julia底层就是类似于scheme的表达。可以粗浅地认为julia是一个高级版的scheme。</p>
+<p>可见，运算符就是个函数。</p>
+<p>c&#43;&#43;可以进行运算符重载，即可以重定义或重载大部分 C&#43;&#43; 内置的运算符。这样，就能使用自定义类型的运算符。重载的运算符是带有特殊名称的函数，函数名是由关键字 operator 和其后要重载的运算符符号构成的。与其他函数一样，重载运算符有一个返回类型和一个参数列表。</p>
+<p>python呢，对一个类而言，如果你重新定义了<strong>add</strong>函数，就是重载了&#43;运算符。</p>
+<p>而julia呢，用的是多重分发，你针对你的类型增加了Base.&#40;&#43;&#41;函数，就是对你的这个类型定义了&#43;运算符。</p>
+<p>核心本质，加减乘除运算符本质都是函数。采用前缀表达式，尽管像四则混合运算这样的情况对眼睛不友好，可是使用函数表达方式，很用户友好。</p>
+<ul>
+<li><p><strong>主函数并不是必须的，但运行程序必须有个入口</strong></p>
+
+</ul>
+<p>julia的、python的、java的入口有什么差异</p>
+<ul>
+<li><p><strong>提供给函数的参数需要按约定好的要求</strong></p>
+
+</ul>
+<p>函数的参数</p>
+<ul>
+<li><p><strong>函数可以封装成库给别人调用，有动态库，有静态库</strong></p>
+
+</ul>
+<p>dll，lib，so，a，dylib，</p>
+<ul>
+<li><p><strong>函数能跨语言调用</strong></p>
+
+</ul>
+<p>dll被python调用，dll被julia调用，在fortran与c混合编程中iso<em>c</em>binding的桥梁作用</p>
+<ul>
+<li><p><strong>可执行程序就是个函数，但是函数参数的给定方式是命令行参数</strong></p>
+
+</ul>
+<p>c语言的命令行参数，fortran程序的命令行参数</p>
+<ul>
+<li><p><strong>程序执行时的环境变量也会影响函数的行为</strong></p>
+
+<li><p><strong>函数运行时的“环境”与闭包</strong></p>
+
+</ul>
+<p>，盗梦空间，打游戏的技能表，栈</p>
+<ul>
+<li><p><strong>事件驱动与死循环，服务程序</strong></p>
+
+<li><p>对死循环程序的控制，任务管理器与上帝之手</p>
+
+<li><p>操作系统就是最初的那个根函数</p>
+
+<li><p>c&#43;&#43;的函数模板与泛型编程</p>
+
+<li><p>动态类型语言与静态类型语言，及它们的互相靠拢</p>
+
+</ul>
+<p>python的类型提示</p>
+<h2 id="模型与符号"><a href="#模型与符号" class=header-anchor >模型与符号</a></h2>
+<ul>
+<li><p>从符号到模型与parser</p>
+
+<li><p>函数的调用就是用它来处理你的模型</p>
+
+<li><p>模型处理与代码生成</p>
+
+<li><p>编译器也是个函数</p>
+
+</ul>
+<p>c语言的编译过程，c编译到汇编，汇编编译到0101，链接，</p>
+<ul>
+<li><p>移植、平台与上层无关性</p>
+
+<li><p>make与makefile以及项目文件</p>
+
+<li><p>从make，到automake，configure，再到qmake，wmake，以及cmake</p>
+
+<li><p>cmake也是个函数</p>
+
+</ul>
+<h2 id="递归"><a href="#递归" class=header-anchor >递归</a></h2>
+<ul>
+<li><p>斐波拉契数列与递归</p>
+
+<li><p>递归与循环</p>
+
+<li><p>四则混合运算、表达式树与递归</p>
+
+</ul>
+<h2 id="交互式编程与解释器"><a href="#交互式编程与解释器" class=header-anchor >交互式编程与解释器</a></h2>
+<p>我们提交一个Add 3 4</p>
+<ul>
+<li><p>抽象语法树</p>
+
+<li><p>递归处理是解释器的处理办法</p>
+
+</ul>
+<h2 id="抽象与封装"><a href="#抽象与封装" class=header-anchor >抽象与封装</a></h2>
+<ul>
+<li><p>结构体，有理数的加减乘除</p>
+
+<li><p>结构体演变为类</p>
+
+<li><p>以类为基础的面向对象编程，封装，继承，多态</p>
+
+<li><p>算法的不依赖于具体的类型</p>
+
+</ul>
+<p>C&#43;&#43;的模板类 julia的参数类型</p>
+<ul>
+<li><p>java的java、class、jar</p>
+
+<li><p>julia的多重分发</p>
+
+<li><p>go的嵌入体</p>
+
+<li><p>库与头文件、包、模块</p>
+
+<li><p>软件包与生态</p>
+
+<li><p>名字空间</p>
+
+</ul>
+<h2 id="图形界面与低代码开发"><a href="#图形界面与低代码开发" class=header-anchor >图形界面与低代码开发</a></h2>
+<ul>
+<li><p>从gcc、gdb到IDE</p>
+
+<li><p>儿童编程Scratch与背后的code</p>
+
+</ul>
+<p>-从delphi、C#、QT到浏览器</p>
+<h2 id="如何进行进一步学习"><a href="#如何进行进一步学习" class=header-anchor >如何进行进一步学习</a></h2>
+<ul>
+<li><p>学习一门编程语言，掌握关键语言特性，忽略次要特性</p>
+
+<li><p>注意语言特有的那些区别于其他语言的地方</p>
+
+<li><p>编程与算法，sicp与leecode</p>
+
+<li><p>食材、调料与大餐</p>
+
+<li><p>搜索引擎、github</p>
+
+</ul>
+<h2 id="再看抽象与封装"><a href="#再看抽象与封装" class=header-anchor >再看抽象与封装</a></h2>
+<ul>
+<li><p>硬件的一层又一层抽象</p>
+
+<li><p>对用户友好与对机器友好</p>
+
+</ul>
+<p>从javascript到typescript 从0101到汇编到c，再到今天的高级语言</p>
+<ul>
+<li><p>软件的一层又一层抽象</p>
+
+</ul>
+<p>从ops说说计算方法与硬件无关性 DSL与库</p>
+<ul>
+<li><p>知识的结构</p>
+
+</ul>
+<p>欧几里得几何原本</p>
+<p>自然数的定义</p>
+<p>让我们谈谈lambda演算</p>
+<p>lisp的本质，xml，ant</p>
+<ul>
+<li><p>站在巨人的肩膀上</p>
+
+</ul>
+<h2 id="不是最后的最后"><a href="#不是最后的最后" class=header-anchor >不是最后的最后</a></h2>
+<p>吾生也有涯，而知也无涯</p>
+<p>知识在爆炸，与时俱进</p>
+<p>从下到上的学习与从上到下的做事，不同的阶段，框架与细节相结合</p>
+<p>学习与成功五要素，学习的能力、学习的驱动力、学习的路径、机缘、持续努力</p>
+<p>前进的方法：实践、认识、再实践、再认识</p>
+<div class=page-foot >
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Mingtao Li. Last modified: May 09, 2022.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+      </div> 
+  </div> 
+  <script src="/enpo811203/libs/pure/ui.min.js"></script>
