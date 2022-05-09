@@ -264,12 +264,40 @@ CLion为了方便我们使用，还产生了项目的 CMakelist.txt文件。在C
 
 如果我们有linux系统，我们实际上可以使用`ldd ls`，来查看ls这个命令运行的时候要用到的动态链接库。如果找不到某个so文件，那么你的程序就无法执行。
 
-那么系统会到哪里去找这些动态链接库和静态链接库呢。先说Linux下的情况。静态的，是编译时要嵌入的，所以如果使用gcc命令行编译，`gcc -I`的部分`-I`后面指定头文件搜索目录，`-L`指定加载的库所在地。动态的，编译的时候，也是需要`-I` `-L`这样的选项指定。还有就是会去系统的两个变量所描述的目录去找。一个是INCLUDE_PATH，一个是LD_LIBRARY_PATH。而这两个变量，系统会维护，你自己也可以对它进行改变。windows下类似，往往还在当前目录去搜索。如果使用visual studio系列的集成开发环境，则在配置中，可以指定使用哪些静态动态链接库，以及它们所在的位置。
+那么系统会到哪里去找这些动态链接库和静态链接库呢。先说Linux下的情况。静态的，是编译时要嵌入的，所以如果使用gcc命令行编译，`gcc -I`的部分`-I`后面指定头文件搜索目录，`-L`指定加载的库所在地。动态的，编译的时候，也是需要`-I` `-L`这样的选项指定。还有就是会去系统的两个变量所描述的目录去找。一个是`INCLUDE_PATH`，一个是`LD_LIBRARY_PATH`。而这两个变量系统会维护，你自己也可以对它进行改变。windows下类似，但往往还在当前目录去搜索。如果使用visual studio系列的集成开发环境编程，则在配置中，可以指定使用哪些静态动态链接库，以及它们所在的位置。
 
 静态链接的好说，函数都嵌入到你的exe中了，拷贝到别的电脑上就能用。它的缺点是可执行文件相对较大。动态链接库，除了拷贝你的exe文件过去之外，还得确保在目标机子上，相应的动态链接库也能被找到。
 
 - **函数能跨语言调用**
-dll被python调用，dll被julia调用，在fortran与c混合编程中iso_c_binding的桥梁作用
+
+我们通过c语言写函数，编译成动态链接库（dll或者so），它能被python调用，比如以下是一个软件的程序片段（https://github.com/NREL/REopt_API/blob/master/reo/src/sscapi.py），
+
+```python
+class PySSC:
+
+    def __init__(self):
+        if sys.platform == 'win32' or sys.platform == 'cygwin':
+            # nlaws 201201 Windows is no longer supported (by celery) but is cygwin supported?
+            self.pdll = CDLL("ssc.dll")
+        elif sys.platform == 'darwin':
+            # NOTE: the path of this file must be in DYLD_LIBRARY_PATH
+            self.pdll = CDLL("ssc.dylib")
+        elif sys.platform == 'linux2' or sys.platform == 'linux':
+            # NOTE: the path of this file must be in LD_LIBRARY_PATH
+            self.pdll = CDLL('ssc.so')
+        else:
+            print("Platform of type {} not supported for wind analyses.".format(sys.platform))
+    ...
+    
+    def version(self):
+        self.pdll.ssc_version.restype = c_int
+        return self.pdll.ssc_version()
+```
+它首先根据你系统的不同，加载了对应的动态链接库，然后定义了version函数。你调用这个python版的version函数时，本质是执行了动态链接库中的ssc_version()函数。
+
+
+
+，dll被julia调用，在fortran与c混合编程中`iso_c_binding`的桥梁作用
 
 - **可执行程序就是个函数，但是函数参数的给定方式是命令行参数**
 c语言的命令行参数，fortran程序的命令行参数
