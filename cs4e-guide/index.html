@@ -278,10 +278,308 @@ julia&gt;</code></pre>
 <ul>
 <li><p><strong>事件驱动与死循环，服务程序</strong></p>
 
-<li><p>对死循环程序的控制，任务管理器与上帝之手</p>
+</ul>
+<p>我们初学编程的时候，老师给我们说，不要写死循环。是的，那时候电脑就给你个黑屏，死循环无法退出，机子就只好重启了。</p>
+<p>可是，真的不能写死循环吗？以下来自<a href="https://github.com/APMonitor/arduino/blob/master/0_Test_Device/Python/tclab_v2/tclab_v2.ino">https://github.com/APMonitor/arduino/blob/master/0_Test_Device/Python/tclab_v2/tclab_v2.ino</a>，是一个温度控制小实验板上的程序，arduino上运行的。复制这么长的代码不利于阅读，但是为了完整性，我们还是都贴过来。</p>
+<pre><code class="julia hljs"><span class=hljs-comment >#include &quot;Arduino.h&quot;</span>
 
-<li><p>操作系统就是最初的那个根函数</p>
+// determine board type
+<span class=hljs-comment >#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)</span>
+  <span class=hljs-built_in >String</span> boardType = <span class=hljs-string >&quot;Arduino Uno&quot;</span>;
+<span class=hljs-comment >#elif defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega16U4__)</span>
+  <span class=hljs-built_in >String</span> boardType = <span class=hljs-string >&quot;Arduino Leonardo/Micro&quot;</span>;
+<span class=hljs-comment >#elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)</span>
+  <span class=hljs-built_in >String</span> boardType = <span class=hljs-string >&quot;Arduino Mega&quot;</span>;
+<span class=hljs-comment >#else </span>
+  <span class=hljs-built_in >String</span> boardType = <span class=hljs-string >&quot;Unknown board&quot;</span>;
+<span class=hljs-comment >#endif</span>
 
+// Enable debugging output
+<span class=hljs-keyword >const</span> bool DEBUG = <span class=hljs-literal >false</span>;
+
+// constants
+<span class=hljs-keyword >const</span> <span class=hljs-built_in >String</span> vers = <span class=hljs-string >&quot;2.0.1&quot;</span>;   // version of this firmware
+<span class=hljs-keyword >const</span> long baud = <span class=hljs-number >115200</span>;      // serial baud rate
+<span class=hljs-keyword >const</span> char sp = <span class=hljs-string >&#x27; &#x27;</span>;           // command separator
+<span class=hljs-keyword >const</span> char nl = &#x27;\n&#x27;;          // command terminator
+
+// pin numbers corresponding to signals on the TC Lab Shield
+<span class=hljs-keyword >const</span> int pinT1   = <span class=hljs-number >0</span>;         // T1
+<span class=hljs-keyword >const</span> int pinT2   = <span class=hljs-number >2</span>;         // T2
+<span class=hljs-keyword >const</span> int pinQ1   = <span class=hljs-number >3</span>;         // Q1
+<span class=hljs-keyword >const</span> int pinQ2   = <span class=hljs-number >5</span>;         // Q2
+<span class=hljs-keyword >const</span> int pinLED1 = <span class=hljs-number >9</span>;         // LED1
+
+// temperature alarm limits
+<span class=hljs-keyword >const</span> int limT1   = <span class=hljs-number >50</span>;       // T1 high alarm (°C)
+<span class=hljs-keyword >const</span> int limT2   = <span class=hljs-number >50</span>;       // T2 high alarm (°C)
+
+// LED1 levels
+<span class=hljs-keyword >const</span> int hiLED   =  <span class=hljs-number >60</span>;       // hi LED
+<span class=hljs-keyword >const</span> int loLED   = hiLED/<span class=hljs-number >16</span>;  // lo LED
+
+// <span class=hljs-keyword >global</span> variables
+char Buffer[<span class=hljs-number >64</span>];               // buffer <span class=hljs-keyword >for</span> parsing serial input
+int buffer_index = <span class=hljs-number >0</span>;          // index <span class=hljs-keyword >for</span> Buffer
+<span class=hljs-built_in >String</span> cmd;                    // command
+float val;                     // command value
+int ledStatus;                 // <span class=hljs-number >1</span>: loLED
+                               // <span class=hljs-number >2</span>: hiLED
+                               // <span class=hljs-number >3</span>: loLED blink
+                               // <span class=hljs-number >4</span>: hiLED blink
+long ledTimeout = <span class=hljs-number >0</span>;           // when to <span class=hljs-keyword >return</span> LED to normal operation
+float LED = <span class=hljs-number >100</span>;               // LED override brightness
+float P1 = <span class=hljs-number >200</span>;                // heater <span class=hljs-number >1</span> power limit <span class=hljs-keyword >in</span> units of pwm. Range <span class=hljs-number >0</span> to <span class=hljs-number >255</span>
+float P2 = <span class=hljs-number >100</span>;                // heater <span class=hljs-number >2</span> power limit <span class=hljs-keyword >in</span> units <span class=hljs-keyword >in</span> pwm, range <span class=hljs-number >0</span> to <span class=hljs-number >255</span>
+float Q1 = <span class=hljs-number >0</span>;                  // last value written to heater <span class=hljs-number >1</span> <span class=hljs-keyword >in</span> units of percent
+float Q2 = <span class=hljs-number >0</span>;                  // last value written to heater <span class=hljs-number >2</span> <span class=hljs-keyword >in</span> units of percent
+int alarmStatus;               // hi temperature alarm status
+boolean newData = <span class=hljs-literal >false</span>;       // boolean flag indicating new command
+int n =  <span class=hljs-number >10</span>;                   // number of samples <span class=hljs-keyword >for</span> each temperature measurement
+
+
+void readCommand() {
+  <span class=hljs-keyword >while</span> (Serial &amp;&amp; (Serial.available() &gt; <span class=hljs-number >0</span>) &amp;&amp; (newData == <span class=hljs-literal >false</span>)) {
+    int byte = Serial.read();
+    <span class=hljs-keyword >if</span> ((byte != &#x27;\r&#x27;) &amp;&amp; (byte != nl) &amp;&amp; (buffer_index &lt; <span class=hljs-number >64</span>)) {
+      Buffer[buffer_index] = byte;
+      buffer_index++;
+    }
+    <span class=hljs-keyword >else</span> {
+      newData = <span class=hljs-literal >true</span>;
+    }
+  }   
+}
+
+// <span class=hljs-keyword >for</span> debugging with the serial monitor <span class=hljs-keyword >in</span> Arduino IDE
+void echoCommand() {
+  <span class=hljs-keyword >if</span> (newData) {
+    Serial.write(<span class=hljs-string >&quot;Received Command: &quot;</span>);
+    Serial.write(Buffer, buffer_index);
+    Serial.write(nl);
+    Serial.flush();
+  }
+}
+
+// <span class=hljs-keyword >return</span> average  of n reads of thermister temperature <span class=hljs-keyword >in</span> °C
+inline float readTemperature(int pin) {
+  float degC = <span class=hljs-number >0.0</span>;
+  <span class=hljs-keyword >for</span> (int i = <span class=hljs-number >0</span>; i &lt; n; i++) {
+    degC += analogRead(pin) * <span class=hljs-number >0.322265625</span> - <span class=hljs-number >50.0</span>;    // use <span class=hljs-keyword >for</span> <span class=hljs-number >3.3</span>v AREF
+    //degC += analogRead(pin) * <span class=hljs-number >0.170898438</span> - <span class=hljs-number >50.0</span>;  // use <span class=hljs-keyword >for</span> <span class=hljs-number >1.75</span>v AREF
+  }
+  <span class=hljs-keyword >return</span> degC / float(n);
+}
+
+void parseCommand(void) {
+  <span class=hljs-keyword >if</span> (newData) {
+    <span class=hljs-built_in >String</span> read_ = <span class=hljs-built_in >String</span>(Buffer);
+
+    // separate command from associated data
+    int idx = read_.indexOf(sp);
+    cmd = read_.substring(<span class=hljs-number >0</span>, idx);
+    cmd.trim();
+    cmd.toUpperCase();
+
+    // extract data. toFloat() returns <span class=hljs-number >0</span> on error
+    <span class=hljs-built_in >String</span> data = read_.substring(idx + <span class=hljs-number >1</span>);
+    data.trim();
+    val = data.toFloat();
+
+    // reset parameter <span class=hljs-keyword >for</span> next command
+    memset(Buffer, <span class=hljs-number >0</span>, sizeof(Buffer));
+    buffer_index = <span class=hljs-number >0</span>;
+    newData = <span class=hljs-literal >false</span>;
+  }
+}
+
+void sendResponse(<span class=hljs-built_in >String</span> msg) {
+  Serial.println(msg);
+}
+
+void sendFloatResponse(float val) {
+  Serial.println(<span class=hljs-built_in >String</span>(val, <span class=hljs-number >3</span>));
+}
+
+void sendBinaryResponse(float val) {
+  byte *b = (byte*)&amp;val;
+  Serial.write(b, <span class=hljs-number >4</span>);  
+}
+
+void dispatchCommand(void) {
+  <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;A&quot;</span>) {
+    setHeater1(<span class=hljs-number >0</span>);
+    setHeater2(<span class=hljs-number >0</span>);
+    sendResponse(<span class=hljs-string >&quot;Start&quot;</span>);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;LED&quot;</span>) {
+    ledTimeout = millis() + <span class=hljs-number >10000</span>;
+    LED = max(<span class=hljs-number >0</span>, min(<span class=hljs-number >100</span>, val));
+    sendResponse(<span class=hljs-built_in >String</span>(LED));
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;P1&quot;</span>) {
+    P1 = max(<span class=hljs-number >0</span>, min(<span class=hljs-number >255</span>, val));
+    sendResponse(<span class=hljs-built_in >String</span>(P1));
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;P2&quot;</span>) {
+    P2 = max(<span class=hljs-number >0</span>, min(<span class=hljs-number >255</span>, val));
+    sendResponse(<span class=hljs-built_in >String</span>(P2));
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;Q1&quot;</span>) {
+    setHeater1(val);
+    sendFloatResponse(Q1);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;Q1B&quot;</span>) {
+    setHeater1(val);
+    sendBinaryResponse(Q1);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;Q2&quot;</span>) {
+    setHeater2(val);
+    sendFloatResponse(Q2);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;Q2B&quot;</span>) {
+    setHeater1(val);
+    sendBinaryResponse(Q2);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;R1&quot;</span>) {
+    sendFloatResponse(Q1);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;R2&quot;</span>) {
+    sendFloatResponse(Q2);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;SCAN&quot;</span>) {
+    sendFloatResponse(readTemperature(pinT1));
+    sendFloatResponse(readTemperature(pinT2));
+    sendFloatResponse(Q1);
+    sendFloatResponse(Q2);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;T1&quot;</span>) {
+    sendFloatResponse(readTemperature(pinT1));
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;T1B&quot;</span>) {
+    sendBinaryResponse(readTemperature(pinT1));
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;T2&quot;</span>) {
+    sendFloatResponse(readTemperature(pinT2));
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;T2B&quot;</span>) {
+    sendBinaryResponse(readTemperature(pinT2));
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;VER&quot;</span>) {
+    sendResponse(<span class=hljs-string >&quot;TCLab Firmware &quot;</span> + vers + <span class=hljs-string >&quot; &quot;</span> + boardType);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd == <span class=hljs-string >&quot;X&quot;</span>) {
+    setHeater1(<span class=hljs-number >0</span>);
+    setHeater2(<span class=hljs-number >0</span>);
+    sendResponse(<span class=hljs-string >&quot;Stop&quot;</span>);
+  }
+  <span class=hljs-keyword >else</span> <span class=hljs-keyword >if</span> (cmd.length() &gt; <span class=hljs-number >0</span>) {
+    setHeater1(<span class=hljs-number >0</span>);
+    setHeater2(<span class=hljs-number >0</span>);
+    sendResponse(cmd);
+  }
+  Serial.flush();
+  cmd = <span class=hljs-string >&quot;&quot;</span>;
+}
+
+void checkAlarm(void) {
+  <span class=hljs-keyword >if</span> ((readTemperature(pinT1) &gt; limT1) or (readTemperature(pinT2) &gt; limT2)) {
+    alarmStatus = <span class=hljs-number >1</span>;
+  }
+  <span class=hljs-keyword >else</span> {
+    alarmStatus = <span class=hljs-number >0</span>;
+  }
+}
+
+void updateStatus(void) {
+  // determine led status
+  ledStatus = <span class=hljs-number >1</span>;
+  <span class=hljs-keyword >if</span> ((Q1 &gt; <span class=hljs-number >0</span>) or (Q2 &gt; <span class=hljs-number >0</span>)) {
+    ledStatus = <span class=hljs-number >2</span>;
+  }
+  <span class=hljs-keyword >if</span> (alarmStatus &gt; <span class=hljs-number >0</span>) {
+    ledStatus += <span class=hljs-number >2</span>;
+  }
+  // update led depending on ledStatus
+  <span class=hljs-keyword >if</span> (millis() &lt; ledTimeout) {        // override led operation
+    analogWrite(pinLED1, LED);
+  }
+  <span class=hljs-keyword >else</span> {
+    switch (ledStatus) {
+      case <span class=hljs-number >1</span>:  // normal operation, heaters off
+        analogWrite(pinLED1, loLED);
+        <span class=hljs-keyword >break</span>;
+      case <span class=hljs-number >2</span>:  // normal operation, heater on
+        analogWrite(pinLED1, hiLED);
+        <span class=hljs-keyword >break</span>;
+      case <span class=hljs-number >3</span>:  // high temperature alarm, heater off
+        <span class=hljs-keyword >if</span> ((millis() % <span class=hljs-number >2000</span>) &gt; <span class=hljs-number >1000</span>) {
+          analogWrite(pinLED1, loLED);
+        } <span class=hljs-keyword >else</span> {
+          analogWrite(pinLED1, loLED/<span class=hljs-number >4</span>);
+        }
+        <span class=hljs-keyword >break</span>;
+      case <span class=hljs-number >4</span>:  // high temperature alarm, heater on
+        <span class=hljs-keyword >if</span> ((millis() % <span class=hljs-number >2000</span>) &gt; <span class=hljs-number >1000</span>) {
+          analogWrite(pinLED1, hiLED);
+        } <span class=hljs-keyword >else</span> {
+          analogWrite(pinLED1, loLED);
+        }
+        <span class=hljs-keyword >break</span>;
+    }   
+  }
+}
+
+// set Heater <span class=hljs-number >1</span>
+void setHeater1(float qval) {
+  Q1 = max(<span class=hljs-number >0.</span>, min(qval, <span class=hljs-number >100.</span>));
+  analogWrite(pinQ1, (Q1*P1)/<span class=hljs-number >100</span>);
+}
+
+// set Heater <span class=hljs-number >2</span>
+void setHeater2(float qval) {
+  Q2 = max(<span class=hljs-number >0.</span>, min(qval, <span class=hljs-number >100.</span>));
+  analogWrite(pinQ2, (Q2*P2)/<span class=hljs-number >100</span>);
+}
+
+// arduino startup
+void setup() {
+  analogReference(EXTERNAL);
+  <span class=hljs-keyword >while</span> (!Serial) {
+    ; // wait <span class=hljs-keyword >for</span> serial port to connect.
+  }
+  Serial.<span class=hljs-keyword >begin</span>(baud);
+  Serial.flush();
+  setHeater1(<span class=hljs-number >0</span>);
+  setHeater2(<span class=hljs-number >0</span>);
+  ledTimeout = millis() + <span class=hljs-number >1000</span>;
+}
+
+// arduino main event loop
+void loop() {
+  readCommand();
+  <span class=hljs-keyword >if</span> (DEBUG) echoCommand();
+  parseCommand();
+  dispatchCommand();
+  checkAlarm();
+  updateStatus();
+}</code></pre>
+<p>arduino是个单片机。最后一个函数，就相当于是主程序，就是个死循环。</p>
+<pre><code class="julia hljs">void loop() {
+  readCommand();
+  <span class=hljs-keyword >if</span> (DEBUG) echoCommand();
+  parseCommand();
+  dispatchCommand();
+  checkAlarm();
+  updateStatus();
+}</code></pre>
+<p>显然，它就是在那里轮询，问你的命令是啥，然后解析命令，然后分发命令，然后返回状态，然后继续。</p>
+<p>事件驱动程序也一样。图形化的窗口，实际上在不断的“询问”你的鼠标，你的键盘输入，基于此做出反应。直到你点了关闭按钮或者退出菜单。</p>
+<p>服务器程序也一样。网页服务器程序就是在那里等待你的请求。专业的说法是监听，listen。</p>
+<p>那为什么dos时代不让我们写死循环呢？因为没有任务管理器。没有上帝之手从外面关掉它。现在有些程序运行与沙箱模式，你可以随便玩，但是在外头可以销毁沙箱。</p>
+<p>现在操作系统进步了，多任务的，都有办法。</p>
+<p>事实上，从函数调用的过程来说，操作系统就是最初的那个“根”函数。（类似于桌面上一堆窗口，你的desktop是哪个根窗口。）当然，操作系统不是一个函数组成的。比喻来说，大体如此。</p>
+<ul>
 <li><p>c&#43;&#43;的函数模板与泛型编程</p>
 
 <li><p>动态类型语言与静态类型语言，及它们的互相靠拢</p>
