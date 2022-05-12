@@ -225,7 +225,7 @@ Meta.show_sexpr(abc)</code></pre>
   parsecommandline(argc, argv, &amp;b);
 <span class=hljs-comment >#endif /* not TRILIBRARY */</span>
   m.steinerleft = b.steiner;</code></pre>
-<p>Fortran也类似，对于Fortran2003及其之后，使用GET<em>COMMAND</em>ARGUMENT来获取参数</p>
+<p>Fortran也类似，对于Fortran2003及其之后，使用<code>GET_COMMAND_ARGUMENT</code>来获取参数</p>
 <pre><code class="julia hljs">PROGRAM test_get_command_argument
 INTEGER :: i,n
 CHARACTER(len=<span class=hljs-number >32</span>) :: arg
@@ -248,10 +248,33 @@ END PROGRAM</code></pre>
 <ul>
 <li><p><strong>程序执行时的环境变量也会影响函数的行为</strong></p>
 
+</ul>
+<p>还需要说的就是，系统运行的时候存在一些平时我们没有注意的一些“变量”，通常称为环境变量。包括，用户名是啥啊，用的shell是啥啊，当前目录是上啊，等等。在命令行提示符下输入<code>env</code>回车，你就能看到很多的环境变量。通俗点说呢，就是个变量表。有变量名，有值。linux下也是如此。</p>
+<p>某些函数在运行时会询问这个参数表（环境变量表）中某些参数的值，从而确定自己的行为。</p>
+<p>比如我们的julia，我们执行<code>versioninfo&#40;&#41;</code>的时候，可以看到<code>JULIA_PKG_SERVER &#61; https://mirrors.tuna.tsinghua.edu.cn/julia</code>，这样，我在进入Pkg模式，添加软件包时，它就会去<code>JULIA_PKG_SERVER</code>标记的镜像站点下载。</p>
+<pre><code class="julia hljs">julia&gt; versioninfo()
+Julia Version <span class=hljs-number >1.7</span><span class=hljs-number >.2</span>
+Commit bf53498635 (<span class=hljs-number >2022</span>-<span class=hljs-number >02</span>-<span class=hljs-number >06</span> <span class=hljs-number >15</span>:<span class=hljs-number >21</span> UTC)
+Platform Info:
+  OS: Windows (x86_64-w64-mingw32)
+  CPU: Intel(R) Core(TM) i7-<span class=hljs-number >7700</span> CPU @ <span class=hljs-number >3.60</span>GHz
+  WORD_SIZE: <span class=hljs-number >64</span>
+  LIBM: libopenlibm
+  LLVM: libLLVM-<span class=hljs-number >12.0</span><span class=hljs-number >.1</span> (ORCJIT, skylake)
+Environment:
+  JULIA_PKG_SERVER = https://mirrors.tuna.tsinghua.edu.cn/julia
+julia&gt;</code></pre>
+<p>当然的，是这些函数内部要求了要去查某个或者某些环境变量的值，并使用了它。</p>
+<p>小结来说，程序执行时的环境变量也会影响函数的行为。</p>
+<ul>
 <li><p><strong>函数运行时的“环境”与闭包</strong></p>
 
 </ul>
-<p>，盗梦空间，打游戏的技能表，栈</p>
+<p>函数调用，形象来讲就是做了个梦，被调用的函数中再调用函数，就是梦中做梦。（你看过电影盗梦空间吗？）</p>
+<p>打过游戏的同学可能也有体会，函数调用就是玩游戏时打开了一个门，屏幕黑了一下或者白了一下，进入了一个新的情景，在这个新的情景中还可能会继续下去打开新的密室。</p>
+<p>可是你在梦中所携带的工具是进入梦境就给你了的，就是“变量-值”表。打游戏的技能集，就相当于是若干个变量-值对。</p>
+<p>我们从一个游戏情景返回到原来的情景，就相当于是函数调用返回。返回回来，情节就接着演啊。这就是进入一层梦境的时候，就把所有的技能集加在最前面，返回的时候就去掉最前面加上去的那些。栈嘛，就是栈。</p>
+<p>操作系统，或者说编译器，总之就是底层的那些，在调用的时候，实际上是把函数入口和“环境”（不只是环境变量，还包括你的参数集，一起组成环境）当成一个整体开始进入梦境。当成一个整体就是构成一个结构体，就是当做一个闭包。</p>
 <ul>
 <li><p><strong>事件驱动与死循环，服务程序</strong></p>
 
