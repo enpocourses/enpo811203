@@ -206,7 +206,7 @@ Meta.show_sexpr(abc)</code></pre>
 
 </ul>
 <p>在linux下的shell下，我们知道命令有很多选项，比如<code>ls</code>，可以在后面加上选项和参数，比如<code>ls -l /usr/local</code>。</p>
-<p>在windows下也一样，以<code>dir</code>这个命令为例，可以加上选项和参数，<code>dir /a c:\&#96;，这里</code>/a<code>是选项，</code>c:&#96;是参数。</p>
+<p>在windows下也一样，以<code>dir</code>这个命令为例，可以加上选项和参数，<code>dir /a c:\</code>，这里<code>/a</code>是选项，<code>c:\</code>是参数。</p>
 <p>我们在<a href="https://github.com/wertarbyte/coreutils/blob/master/src/ls.c">https://github.com/wertarbyte/coreutils/blob/master/src/ls.c</a>看一下ls的源代码，</p>
 <pre><code class="c hljs"><span class=hljs-type >int</span>
 <span class="hljs-title function_">main</span> <span class=hljs-params >(<span class=hljs-type >int</span> argc, <span class=hljs-type >char</span> **argv)</span>
