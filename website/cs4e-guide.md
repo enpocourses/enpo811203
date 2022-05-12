@@ -399,7 +399,7 @@ main (int argc, char **argv)
 #endif /* not TRILIBRARY */
   m.steinerleft = b.steiner;
 ```
-Fortran也类似，对于Fortran2003及其之后，使用GET_COMMAND_ARGUMENT来获取参数
+Fortran也类似，对于Fortran2003及其之后，使用`GET_COMMAND_ARGUMENT`来获取参数
  
 ```
 PROGRAM test_get_command_argument
@@ -429,9 +429,42 @@ END PROGRAM
 所以说，可执行程序就是个函数，但是函数参数的给定方式是命令行参数。
 
 - **程序执行时的环境变量也会影响函数的行为**
+还需要说的就是，系统运行的时候存在一些平时我们没有注意的一些“变量”，通常称为环境变量。包括，用户名是啥啊，用的shell是啥啊，当前目录是上啊，等等。在命令行提示符下输入`env`回车，你就能看到很多的环境变量。通俗点说呢，就是个变量表。有变量名，有值。linux下也是如此。
+
+某些函数在运行时会询问这个参数表（环境变量表）中某些参数的值，从而确定自己的行为。
+
+比如我们的julia，我们执行`versioninfo()`的时候，可以看到`JULIA_PKG_SERVER = https://mirrors.tuna.tsinghua.edu.cn/julia`，这样，我在进入Pkg模式，添加软件包时，它就会去`JULIA_PKG_SERVER`标记的镜像站点下载。
+```julia
+
+julia> versioninfo()
+Julia Version 1.7.2
+Commit bf53498635 (2022-02-06 15:21 UTC)
+Platform Info:
+  OS: Windows (x86_64-w64-mingw32)
+  CPU: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-12.0.1 (ORCJIT, skylake)
+Environment:
+  JULIA_PKG_SERVER = https://mirrors.tuna.tsinghua.edu.cn/julia
+julia>
+```
+
+当然的，是这些函数内部要求了要去查某个或者某些环境变量的值，并使用了它。
+
+小结来说，程序执行时的环境变量也会影响函数的行为。
 
 - **函数运行时的“环境”与闭包**
-，盗梦空间，打游戏的技能表，栈
+
+函数调用，形象来讲就是做了个梦，被调用的函数中再调用函数，就是梦中做梦。（你看过电影盗梦空间吗？）
+
+打过游戏的同学可能也有体会，函数调用就是玩游戏时打开了一个门，屏幕黑了一下或者白了一下，进入了一个新的情景，在这个新的情景中还可能会继续下去打开新的密室。
+
+可是你在梦中所携带的工具是进入梦境就给你了的，就是“变量-值”表。打游戏的技能集，就相当于是若干个变量-值对。
+
+我们从一个游戏情景返回到原来的情景，就相当于是函数调用返回。返回回来，情节就接着演啊。这就是进入一层梦境的时候，就把所有的技能集加在最前面，返回的时候就去掉最前面加上去的那些。栈嘛，就是栈。
+
+操作系统，或者说编译器，总之就是底层的那些，在调用的时候，实际上是把函数入口和“环境”（不只是环境变量，还包括你的参数集，一起组成环境）当成一个整体开始进入梦境。当成一个整体就是构成一个结构体，就是当做一个闭包。
 
 - **事件驱动与死循环，服务程序**
 
