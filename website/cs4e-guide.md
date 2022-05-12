@@ -376,7 +376,7 @@ end module OPS_Fortran_Declarations
 - **可执行程序就是个函数，但是函数参数的给定方式是命令行参数**
 在linux下的shell下，我们知道命令有很多选项，比如`ls`，可以在后面加上选项和参数，比如`ls -l /usr/local`。
 
-在windows下也一样，以`dir`这个命令为例，可以加上选项和参数，`dir /a c:\`，这里`/a`是选项，`c:\`是参数。
+在windows下也一样，以`dir`这个命令为例，可以加上选项和参数，`dir /a c:\ `，这里`/a`是选项，`c:\ `是参数。
 
 我们在<https://github.com/wertarbyte/coreutils/blob/master/src/ls.c>看一下ls的源代码，
 ```c
