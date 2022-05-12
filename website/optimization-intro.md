@@ -5,7 +5,7 @@
 
 ## 优化是什么
 
-## 跑一个人任务呗
+## 跑一个任务呗
 
 ## 优化问题分类
 lp，nlp，milp，minlp，
@@ -27,4 +27,10 @@ gams，apml， aimms，pyomo，jump
 
 neos， apmonitor， pyomo，jump，
 
+**NEOS**
+如果你想尝试不同的求解器，包括一些商业的求解器，你可以使用[NEOS-Server](https://neos-server.org/neos/)。他们提供了不同格式输入，并且还提供api调用。就是要求不能滥用。
+
+**APMonitor和Gekko**
+
+**JuMP.jl**
 
