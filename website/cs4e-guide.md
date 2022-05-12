@@ -60,16 +60,16 @@ void main() {
 
 ```c
 include <stdio.h>
+int fun2()
+{
+    printf("I am in fun2");
+    return 0;
+}
+
 int fun1()
 {
     printf("I am in fun1");
     fun2();
-    return 0;
-}
-
-int fun2()
-{
-    printf("I am in fun2");
     return 0;
 }
 
@@ -235,20 +235,47 @@ Julia语言中通过对同一个函数名写不同的处理方法来实现。而
 
 c语言中，stdio等库就是这么个情况，把很多有用的函数封装在一起，成为一个库（静态和动态我们等会儿再说），库里有什么则通过stdio.h这个文件告诉你，同时stdio.h也告诉你了要以什么样的参数方式调用。
 
-我们如果使用CLion，创建一个新项目，选择c library，可以产生如下的两个文件
+我们如果使用CLion，创建一个新项目，选择c library，可以产生如下的两个文件，library.h和library.cpp
+```cpp
+#ifndef TESTD_LIBRARY_H
+#define TESTD_LIBRARY_H
 
-```c
+void hello();
+
+#endif //TESTD_LIBRARY_H
+
+```
+```cpp
+#include "library.h"
+
+#include <iostream>
+
+void hello() {
+    std::cout << "Hello, World!" << std::endl;
+}
 
 ```
 
-```c
 
+CLion为了方便我们使用，还产生了项目的 CMakelists.txt文件。
+```cmake
+cmake_minimum_required(VERSION 3.20)
+project(testd)
+
+set(CMAKE_CXX_STANDARD 14)
+
+add_library(testd library.cpp)
 ```
-CLion为了方便我们使用，还产生了项目的 CMakelist.txt文件。在Clion中，我们build一下，就产生了对应的lib文件。
 
-如果我们当初创建c library的时候，选择的是动态链接库，则产生dll文件。
+在Clion中，我们build一下，就产生了对应的libtestd.a文件。
 
-我们对比两个项目所有不同的文件，就会发现只有cmakelist.txt不同。
+
+
+如果我们当初创建c library的时候，选择的是动态链接库，则产生的CMakelists.txt略有不同，
+```
+add_library(testd SHARED library.cpp)
+```
+我们build之后呢，产生的则是libtestd.dll文件。
 
 这里我们首先解释一下动态链接库和静态链接库。
 
@@ -262,7 +289,7 @@ CLion为了方便我们使用，还产生了项目的 CMakelist.txt文件。在C
 
 在mac os x 下，动态链接库一般是dylib为后缀名。
 
-如果我们有linux系统，我们实际上可以使用`ldd ls`，来查看ls这个命令运行的时候要用到的动态链接库。如果找不到某个so文件，那么你的程序就无法执行。
+如果我们有linux系统，我们可以在终端下使用`ldd ls`，来查看ls这个命令运行的时候要用到的动态链接库。如果找不到某个so文件，那么你的程序就无法执行。
 
 那么系统会到哪里去找这些动态链接库和静态链接库呢。先说Linux下的情况。静态的，是编译时要嵌入的，所以如果使用gcc命令行编译，`gcc -I`的部分`-I`后面指定头文件搜索目录，`-L`指定加载的库所在地。动态的，编译的时候，也是需要`-I` `-L`这样的选项指定。还有就是会去系统的两个变量所描述的目录去找。一个是`INCLUDE_PATH`，一个是`LD_LIBRARY_PATH`。而这两个变量系统会维护，你自己也可以对它进行改变。windows下类似，但往往还在当前目录去搜索。如果使用visual studio系列的集成开发环境编程，则在配置中，可以指定使用哪些静态动态链接库，以及它们所在的位置。
 
@@ -295,16 +322,11 @@ class PySSC:
 ```
 它首先根据你系统的不同，加载了对应的动态链接库，然后定义了version函数。你调用这个python版的version函数时，本质是执行了动态链接库中的ssc_version()函数。
 
-dll也可以被julia调用。以下这段文字直接复制自julia中文文档，
->在数值计算领域，尽管有很多用 C 语言或 Fortran 写的高质量且成熟的库都可以用 Julia 重写，但为了便捷利用现有的 C 或 Fortran 代码，Julia 提供简洁且高效的调用方式。Julia 的哲学是 no boilerplate： Julia 可以直接调用 C/Fortran 的函数，不需要任何"胶水"代码，代码生成或其它编译过程 – 即使在交互式会话 (REPL/Jupyter notebook) 中使用也一样. 在 Julia 中，上述特性可以仅仅通过调用 ccall 实现，它的语法看起来就像是普通的函数调用。
+dll也可以被julia调用。对dll，Julia 提供简洁且高效的调用方式。Julia 的哲学是 no boilerplate： Julia 可以直接调用 C/Fortran 的函数，不需要任何"胶水"代码，代码生成或其它编译过程。上述特性可以仅仅通过调用 ccall 实现，它的语法看起来就像是普通的函数调用。
 
-> 被调用的代码必须是一个共享库（.so, .dylib, .dll）。大多数 C 和 Fortran 库都已经是以共享库的形式发布的，但在用 GCC 或 Clang 编译自己的代码时，需要添加 -shared 和 -fPIC 编译器选项。由于 Julia 的 JIT 生成的机器码跟原生 C 代码的调用是一样，所以在 Julia 里调用 C/Fortran 库的额外开销与直接从 C 里调用是一样的。[1]
+被调用的代码必须是一个共享库（.so, .dylib, .dll）。大多数 C 和 Fortran 库都已经是以共享库的形式发布的，但在用 GCC 或 Clang 编译自己的代码时，需要添加 -shared 和 -fPIC 编译器选项。
 
-> 可以通过元组 (:function, "library") 或 ("function", "library") 这两种形式来索引库中的函数，其中 function 是函数名，library 是库名。（特定平台/操作系统的）加载路径中可用的共享库将按名称解析。 也可以指定库的完整路径。
-
-> 可以单独使用函数名来代替元组（只用 :function 或 "function"）。在这种情况下，函数名在当前进程中进行解析。这一调用形式可用于调用 C 库函数、Julia 运行时中的函数或链接到 Julia 的应用程序中的函数。
-
-> 默认情况下，Fortran 编译器会进行名称修饰（例如，将函数名转换为小写或大写，通常会添加下划线），要通过 ccall 调用 Fortran 函数，传递的标识符必须与 Fortran 编译器名称修饰之后的一致。此外，在调用 Fortran 函数时，所有输入必须以指针形式传递，并已在堆或栈上分配内存。这不仅适用于通常是堆分配的数组及可变对象，而且适用于整数和浮点数等标量值，尽管这些值通常是栈分配的，且在使用 C 或 Julia 调用约定时通常是通过寄存器传递的。
+可以通过(:function, "library") 或 ("function", "library") 这两种形式来索引库中的函数，其中 function 是函数名，library 是库名。（特定平台/操作系统的）加载路径中可用的共享库将按名称解析。 也可以指定库的完整路径。
 
 一个典型的例子如下：
 ```julia
@@ -350,7 +372,61 @@ end module OPS_Fortran_Declarations
 小结一下，函数能跨语言调用，按照提供（要求）的方法就好。
 
 - **可执行程序就是个函数，但是函数参数的给定方式是命令行参数**
-c语言的命令行参数，fortran程序的命令行参数
+在linux下的shell下，我们知道命令有很多选项，比如`ls`，可以在后面加上选项和参数，比如`ls -l /usr/local`。
+
+在windows下也一样，以`dir`这个命令为例，可以加上选项和参数，`dir /a c:\`，这里`/a`是选项，`c:\`是参数。
+
+我们在<https://github.com/wertarbyte/coreutils/blob/master/src/ls.c>看一下ls的源代码，
+```c
+int
+main (int argc, char **argv)
+{
+    ...
+    initialize_main (&argc, &argv);
+    ...
+    i = decode_switches (argc, argv);
+    ...
+}
+```
+这里的argc和argv就是参数（argument, arg）的数量(count,c)和值（value，v）。而decode_switches就是解析出来参数的值，然后根据参数的值确定函数下一步的行为。
+
+有的可能会单独写一个函数来处理命令行参数，类似于这样,
+```
+#ifdef TRILIBRARY
+  parsecommandline(1, &triswitches, &b);
+#else /* not TRILIBRARY */
+  parsecommandline(argc, argv, &b);
+#endif /* not TRILIBRARY */
+  m.steinerleft = b.steiner;
+```
+Fortran也类似，对于Fortran2003及其之后，使用GET_COMMAND_ARGUMENT来获取参数
+ 
+```
+PROGRAM test_get_command_argument
+INTEGER :: i,n
+CHARACTER(len=32) :: arg
+          
+i = 1
+DO
+CALL get_command_argument(i, arg)
+IF (LEN_TRIM(arg) == 0) EXIT
+READ(arg,'(I3)') n
+WRITE (*,*) n*n
+i = i+1
+END DO
+ 
+END PROGRAM
+```
+比如编译后的可执行程序叫testComArg，在终端中输入： `./testComArg 2 3`
+将得到:
+```
+4
+9
+```
+
+当然python什么的，不外如是。
+
+所以说，可执行程序就是个函数，但是函数参数的给定方式是命令行参数。
 
 - **程序执行时的环境变量也会影响函数的行为**
 
