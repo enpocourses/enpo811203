@@ -78,3 +78,13 @@ neos， apmonitor， pyomo，jump，
 **pyomo**
 
 **OpenMDAO**
+
+
+# 分级组件化建模
+
+plasmo.jl这样的主要是建立了一种分级组件建模方式。
+
+
+# 还有一些想说的
+
+calypso之类的优化，强烈耦合在一块的，不是评价-优化模式。
