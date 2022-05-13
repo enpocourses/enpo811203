@@ -18,6 +18,7 @@ Julia的数学规划建模语言（平台），已经事实上流行起来，很
 apmonitor的python包装版本，底层求解器就是apm.exe，跟apmonitor一样。建模部分开源，求解部分不开源，但是免费，并且可以商用。
 
 ## [OpenMDAO](https://openmdao.org/)
+有julia界面，OpenMDAO.jl。
 ----
 ## [midaco](http://www.midaco-solver.com/)
 这是一个适用于MINLP的蚁群优化算法，应用广泛。其特点在于oracle罚函数。提供了对很多minlp测试问题集的评测。试用版只能用于4个变量的优化。程序本身是使用c++开发的，提供了不同语言的接口。其download页面提供的不同语言接口给我们展示了对不同语言写接口的很好的参考。
@@ -30,6 +31,9 @@ apmonitor的python包装版本，底层求解器就是apm.exe，跟apmonitor一�
 # 建模相关
 
 # 控制相关
+
+## [TCLab温度控制实验室](http://apmonitor.com/pdc/index.php/Main/ArduinoTemperatureControl)
+实践性的学习控制的平台。非常非常推荐。
 
 # 符号计算相关
 ## [CasADi]
@@ -76,8 +80,7 @@ ModelingToolkit.jl
 mystic
 nlpy
 Numberjack
-OpenMDAO
-OpenMDAO.jl
+
 pagmo2
 Plasmo.jl
 PlasmoCompute.jl
@@ -102,4 +105,4 @@ spine-project.org
 WaterModels.jl
 WaterSystems.jl
 WNTR
-yangming.jl -->
+-->
