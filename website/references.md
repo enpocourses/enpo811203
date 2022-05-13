@@ -29,6 +29,7 @@
 
 ----
 ### [midaco](http://www.midaco-solver.com/)
+
 [midaco](http://www.midaco-solver.com/)是一个适用于MINLP的蚁群优化算法，应用非常广泛。其特点在于oracle罚函数。提供了对很多minlp测试问题集的评测。试用版只能用于4个变量的优化，商用版价格看上去也可以接受。程序本身是使用c++开发的，提供了不同语言的接口。其download页面提供的不同语言接口给我们展示了对不同语言写接口的很好的参考。
 
 ### [GAMS](https://www.gams.com/)
@@ -39,7 +40,7 @@ apopt，Ipopt
 
 ## 仿真相关
 ### [ascend](https://ascend4.org/)
-[ascend](https://ascend4.org/)最初由卡耐基梅隆大学先进过程决策中心（[capd](http://capd.cheme.cmu.edu/) ）开发。实际上是采用c++开发了一种语言。虽然现在已经不活跃，但是其思想已经在modelica、gproms等软件上得以延续。
+[ascend](https://ascend4.org/)最初由卡耐基梅隆大学先进过程决策中心（[capd](http://capd.cheme.cmu.edu/) ）开发。现在由澳大利亚国立大学John Pye教授维护开发。ascend实际上是采用c++开发了一种语言。虽然现在已经不活跃，但是其思想已经在modelica、gproms等软件上得以延续。
 
 ### [dwsim]
 
@@ -87,7 +88,7 @@ GasModels.jl
 GasNetworkOptimization
 
 GlobalEnergyGIS
-idaes-pse
+
 indico-slac
 InfrastructureModels.jl
 InfrastructureSystems.jl
