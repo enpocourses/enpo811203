@@ -15,20 +15,28 @@ Julia的数学规划建模语言（平台），已经事实上流行起来，很
 ## [SCIP](https://www.scipopt.org/)
 德国zib开发的优化求解器套集。
 ## [GEKKO](https://github.com/BYU-PRISM/GEKKO)
-apmonitor的python包装版本，底层求解器就是apm.exe，跟apmonitor一样。建模部分开源，求解部分不开源，但是免费，并且可以商用。
+apmonitor的python包装版本，底层求解器就是apm.exe，跟apmonitor一样。建模部分开源，求解部分不开源，但是免费，并且可以商用。apm.exe，提供了linux版本的可执行文件，还有arm版的可执行文件。
 
 ## [OpenMDAO](https://openmdao.org/)
 有julia界面，OpenMDAO.jl。
 ----
 ## [midaco](http://www.midaco-solver.com/)
-这是一个适用于MINLP的蚁群优化算法，应用广泛。其特点在于oracle罚函数。提供了对很多minlp测试问题集的评测。试用版只能用于4个变量的优化。程序本身是使用c++开发的，提供了不同语言的接口。其download页面提供的不同语言接口给我们展示了对不同语言写接口的很好的参考。
+这是一个适用于MINLP的蚁群优化算法，应用非常广泛。其特点在于oracle罚函数。提供了对很多minlp测试问题集的评测。试用版只能用于4个变量的优化，商用版价格看上去也可以接受。程序本身是使用c++开发的，提供了不同语言的接口。其download页面提供的不同语言接口给我们展示了对不同语言写接口的很好的参考。
 
 ## [GAMS](https://www.gams.com/)
 运筹学的老大。没什么说的。
 
 # 仿真相关
+## [ascend](https://ascend4.org/)
+[ascend](https://ascend4.org/)最初由卡耐基梅隆大学先进过程决策中心（[capd](http://capd.cheme.cmu.edu/) ）开发。实际上是采用c++开发了一种语言。虽然现在已经不活跃，但是其思想已经在modelica、gproms等软件上得以延续。
+
+## [dwsim]
+
+## [modelica]
+## [modelingtoolkit]
 
 # 建模相关
+
 
 # 控制相关
 
@@ -45,7 +53,7 @@ AnyMOD.jl
 apm_python
 apopt
 arduino
-ascend
+
 
 Catalyst.jl
 CellMLToolkit.jl
@@ -92,7 +100,6 @@ PowerSystemsTestData
 PSA.jl
 pyipopt
 pykrylov
-pyomo
 REoptLite
 SBML2Julia
 SBMLToolkit.jl
