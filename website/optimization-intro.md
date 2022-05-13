@@ -16,6 +16,10 @@ lp，nlp，milp，minlp，
 
 ### 启发式求解器
 
+### 基于仿真的优化
+
+### 数据驱动优化
+
 ## 优化建模语言（平台）
 gams，apml， aimms，pyomo，jump
 
