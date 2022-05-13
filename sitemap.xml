@@ -8,6 +8,54 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://ai4energy.github.io/enpo811203/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/cs4e-guide/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/menu3/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/modelingtoolkit-intro/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/simulation-intro/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/tools-prep/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/optimization-intro/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/references/index.html</loc>
+    <lastmod>2022-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://ai4energy.github.io/enpo811203/menu2/index.html</loc>
     <lastmod>2022-05-13</lastmod>
     <changefreq>monthly</changefreq>
@@ -20,43 +68,7 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://ai4energy.github.io/enpo811203/menu3/index.html</loc>
-    <lastmod>2022-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://ai4energy.github.io/enpo811203/menu1/index.html</loc>
-    <lastmod>2022-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://ai4energy.github.io/enpo811203/modelingtoolkit-intro/index.html</loc>
-    <lastmod>2022-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://ai4energy.github.io/enpo811203/index.html</loc>
-    <lastmod>2022-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://ai4energy.github.io/enpo811203/tools-prep/index.html</loc>
-    <lastmod>2022-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://ai4energy.github.io/enpo811203/cs4e-guide/index.html</loc>
-    <lastmod>2022-05-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://ai4energy.github.io/enpo811203/optimization-intro/index.html</loc>
     <lastmod>2022-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
