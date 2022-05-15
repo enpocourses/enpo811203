@@ -62,11 +62,14 @@ apopt，Ipopt
 
 ## 符号计算相关
 
-### [CasADi]
-有julia界面CasADi.jl。
-[sympy]
-[symbolics.jl]
+### [CasADi](https://web.casadi.org/)
+[CasADi](https://web.casadi.org/)是c++写的符号计算包，它本身定位并不是一个完整的计算代数包，它的目的是为了非线性优化和自动微分。基于它有很多学术界和工业界的应用。有很多模型预测控制的例子。有人为它写了julia界面[CasADi.jl](https://github.com/ichatzinikolaidis/CasADi.jl)。
 
+### [Symbolics.jl](https://github.com/JuliaSymbolics/Symbolics.jl)
+[Symbolics.jl](https://github.com/JuliaSymbolics/Symbolics.jl)是julia语言下的符号计算包。功能非常强大。有很多的julia包基于Symbolics.jl。Symbolics.jl对完成自动微分、符号计算、优化模型构建等非常有帮助。
+
+### [SymPy](https://www.sympy.org/en/index.html)
+[SymPy](https://www.sympy.org/en/index.html)是python语言下的符号计算包。我没有深入研究过。只是为了方便python用户列出在这里。
 
 ## 能源细分领域相关
 EPANET
