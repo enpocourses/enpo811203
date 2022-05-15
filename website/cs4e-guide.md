@@ -941,3 +941,34 @@ lisp的本质，xml，ant
 学习与成功五要素，学习的能力、学习的驱动力、学习的路径、机缘、持续努力
 
 前进的方法：实践、认识、再实践、再认识
+
+## 参考资料
+
+### [make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)
+[make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)，这个不要看太多，理解了程序编译过程，makefile描述的是依赖关系和生成规则，操作一下就ok了。
+
+### [yuziwen的博客](https://yuziwen.github.io/)
+[yuziwen的博客](https://yuziwen.github.io/)，初学的看一看，理解一下函数、递归和结构体。
+
+### [王垠的博客](http://www.yinwang.org/)
+[王垠的博客](http://www.yinwang.org/),很多都可以读一读，尤其是《解谜计算机科学》、《怎样写一个解释器》、《如何掌握所有的语言》，还有《对 Parser 的误解》、《Lisp 已死，Lisp 万岁！》。
+
+### [让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)
+[让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)是王盛颐写的介绍lambda演算的。
+
+### [lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html) 
+[lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html)我不知道中文的原文最早出现在哪里，这是其英文原文<https://www.defmacro.org/ramblings/lisp.html>。
+
+### [sicp](https://mitpress.mit.edu/sites/default/files/sicp/index.html)
+
+[sicp](https://mitpress.mit.edu/sites/default/files/sicp/index.html)就是大名鼎鼎的sicp。老实说，我没有看完。大体理解过程抽象（就是函数）、数据抽象（就是结构体、类）就差不多了，最多再理解到复数计算、自动求导计算差不多了。有中文版。
+
+### [sicp-js](https://sourceacademy.org/sicpjs)
+[sicp-js](https://sourceacademy.org/sicpjs)是javascript版的sicp，新加坡国立大学一名教教授干的。好处是使用javascript实现，直接在网页上就能运行。其实用javascript入门编程就是好，环境啥的都不用装，有个Chrome，按一下F12就什么都有了。
+
+### [htdp](https://htdp.org/)
+[htdp](https://htdp.org/)是经典编程入门书之一，scheme语言的，写得很细。
+
+以上这些书和链接，不用全看，不然就真的回不来了。理解核心要义。而这个要义就在《解谜计算机科学》，在《计算机科学基础班（第三期）报名》的课程大纲里，在《怎样写一个解释器》里。
+
+还有一点要说的，编程和数学是两码事，编程也不是算法，编程入门到能理解解释器就差不多了，算法入门可能就需要刷力扣那些了。
