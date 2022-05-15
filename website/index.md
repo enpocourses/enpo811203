@@ -7,6 +7,8 @@
 
 # [知识可运行化—建模](modeling-intro)
 
+# [数字孪生？仿真？](simulation-intro)
+
 # [一些典型环境的设置](tools-prep)
 
 # [另文详述的MTK文档](https://ai4energy.github.io/LearnDocs/dev/)
