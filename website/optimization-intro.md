@@ -7,6 +7,46 @@
 
 ## 跑一个任务呗
 
+打开julia，按]进入包管理模式，输入如下的命令安装JuMP.jl,
+```julia
+add JuMP
+```
+我们来考虑如下一个优化问题，
+
+```math
+ \begin{aligned}
+ & \min & 12x + 20y \\
+ & \;\;\text{s.t.} & 6x + 8y \geq 100 \\
+ & & 7x + 12y \geq 120 \\
+ & & x \geq 0 \\
+ & & y \in [0, 3] \\
+ \end{aligned}
+```
+我在julia的REPL下输入如下的代码，
+```
+using JuMP
+using HiGHS
+model = Model(HiGHS.Optimizer)
+@variable(model, x >= 0)
+@variable(model, 0 <= y <= 3)
+@objective(model, Min, 12x + 20y)
+@constraint(model, c1, 6x + 8y >= 100)
+@constraint(model, c2, 7x + 12y >= 120)
+print(model)
+optimize!(model)
+@show termination_status(model)
+@show primal_status(model)
+@show dual_status(model)
+@show objective_value(model)
+@show value(x)
+@show value(y)
+@show shadow_price(c1)
+@show shadow_price(c2)
+nothing #hide
+```
+
+简单的来讲呢，建个模型，告诉这个模型你的变量、目标函数、约束，然后调用合适的求解器求解。用JuMP.jl来处理优化就是这么简单。
+
 ## 优化问题分类
 lp，nlp，milp，minlp，
 
@@ -26,7 +66,6 @@ gams，apml， aimms，pyomo，jump
 ## 优化怎么学
 
 以下来自[知乎的一个回答](https://www.zhihu.com/question/22686770/answer/41243665)，
-
 
 
 > 欢迎转载和分享给更多人，无需标明作者和链接，但如果标了会更显得尊重别人的成果，谢谢
