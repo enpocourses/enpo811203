@@ -955,11 +955,7 @@ DSL与库
 ### [王垠的博客](http://www.yinwang.org/)
 [王垠的博客](http://www.yinwang.org/),很多都可以读一读，尤其是《解谜计算机科学》、《怎样写一个解释器》、《如何掌握所有的语言》，还有《对 Parser 的误解》、《Lisp 已死，Lisp 万岁！》。
 
-### [让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)
-[让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)是王盛颐写的介绍lambda演算的。
 
-### [lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html) 
-[lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html)我不知道中文的原文最早出现在哪里，这是其英文原文<https://www.defmacro.org/ramblings/lisp.html>。
 
 ### [sicp](https://mitpress.mit.edu/sites/default/files/sicp/index.html)
 
@@ -970,6 +966,12 @@ DSL与库
 
 ### [htdp](https://htdp.org/)
 [htdp](https://htdp.org/)是经典编程入门书之一，scheme语言的，写得很细。
+
+### [让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)
+[让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)是王盛颐写的介绍lambda演算的。一般而言，并不需要深入去理解。
+
+### [lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html) 
+[lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html)我不知道中文的原文最早出现在哪里，这是其英文原文<https://www.defmacro.org/ramblings/lisp.html>。恐怕学了java才看得懂，看不懂也不影响啥。
 
 以上这些书和链接，不用全看，不然就真的回不来了。理解核心要义。而这个要义就在《解谜计算机科学》，在《计算机科学基础班（第三期）报名》的课程大纲里，在《怎样写一个解释器》里。
 
