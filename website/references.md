@@ -74,6 +74,37 @@ apopt，Ipopt
 ## 能源细分领域相关
 EPANET
 EnergyPlus和openstudio
+
+
+
+## Julia资源传送门
+
+1. [Julia中文文档](https://cn.julialang.org/)
+2. [Julia官方文档](https://julialang.org/)
+3. [Sciml总站](https://sciml.ai/)
+4. [ModelingToolkit.jl](https://mtk.sciml.ai/stable/)（符号建模包）
+5. [DifferentialEquations.jl](https://diffeq.sciml.ai/dev/)（常微分方程求解包）
+6. [NeuralPDE.jl](https://neuralpde.sciml.ai/stable/)（偏微分方程求解包）
+7. [Symbolics.jl](https://symbolics.juliasymbolics.org/dev/)（MTK依赖的符号求解包）
+8. [JuMP.jl](https://jump.dev/JuMP.jl/stable/)（优化求解器包）
+9. [DiffEqParamEstim.jl](https://diffeqparamestim.sciml.ai/dev/)（基于DE的参数辨识包）
+10. [Plots.ji](https://docs.juliaplots.org/dev/)（可视化包）
+11. [CSV.jl](https://csv.juliadata.org/stable/)
+12. [DataFrames.jl](https://dataframes.juliadata.org/stable/)（大规模数据批量处理包）
+13. [Unitful](https://painterqubits.github.io/Unitful.jl/stable/)（单位计算包）
+14. [GalacticOptim.jl](https://galacticoptim.sciml.ai/dev/)(Sciml优化包)
+15. 
+
+## 其它资源传送门
+
+1. [CoolProp](http://www.coolprop.org/index.html)
+2. [APMonitor-github](https://github.com/APMonitor/)
+3. [APMonitor](http://apmonitor.com/)
+4. [Greet](https://greet.es.anl.gov/)
+5. [Mqtt系列教程](https://www.hangge.com/blog/cache/detail_2347.html)
+6. [Mixed Integer Distributed Ant Colony Optimization(midaco-solver)](http://www.midaco-solver.com/)
+
+
 <!-- 
 AnyMOD.jl
 
