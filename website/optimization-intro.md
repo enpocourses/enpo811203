@@ -13,7 +13,7 @@ add JuMP
 ```
 我们来考虑如下一个优化问题，
 
-```math
+$$
  \begin{aligned}
  & \min & 12x + 20y \\
  & \;\;\text{s.t.} & 6x + 8y \geq 100 \\
@@ -21,7 +21,7 @@ add JuMP
  & & x \geq 0 \\
  & & y \in [0, 3] \\
  \end{aligned}
-```
+$$
 我在julia的REPL下输入如下的代码，
 ```
 using JuMP
