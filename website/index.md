@@ -5,6 +5,8 @@
 
 # [让我们来说说优化](optimization-intro)
 
+# [知识可运行化—建模](modeling-intro)
+
 # [一些典型环境的设置](tools-prep)
 
 # [另文详述的MTK文档](https://ai4energy.github.io/LearnDocs/dev/)
