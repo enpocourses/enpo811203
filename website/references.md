@@ -33,7 +33,7 @@
 [midaco](http://www.midaco-solver.com/)是一个适用于MINLP的蚁群优化算法，应用非常广泛。其特点在于oracle罚函数。提供了对很多minlp测试问题集的评测。试用版只能用于4个变量的优化，不过商用版价格看上去也可以接受。程序本身是使用c++开发的，提供了不同语言的接口。**其download页面提供的不同语言接口给我们展示了对不同语言写接口的很好的参考**。
 
 ### [GAMS](https://www.gams.com/)
-搞运筹学的都懂，没什么说的。
+[GAMS](https://www.gams.com/)，搞运筹学的都懂，没什么说的。
 
 ### 一些求解器
 apopt，Ipopt
@@ -47,7 +47,6 @@ apopt，Ipopt
 [dwsim](https://dwsim.org/)是一个开源的化工流程模拟软件，基于.net开发，序贯模块法。还有些额外的收费模块。
 
 ### [modelica](https://modelica.org/)
-
 [modelica](https://modelica.org/)不是一个软件，而是一个语言，用于信息物理系统建模的语言。modelica是非因果关系建模，联立方程法求解。它有很多商业实现，如dymola、同元等，也有开源实现，如[openmodelica](https://openmodelica.org/)。以前jmodelica是开源的，现在停止开源许可了，但是旧版本仍然可用。有很多开源的modelica库，比如法国电力的thermosyspro，比如ibpsa的buildings库等等。<https://impact.github.io/>这里可以查到很多的modelica库。
 
 ### [ModelingToolkit.jl](https://github.com/SciML/ModelingToolkit.jl)
