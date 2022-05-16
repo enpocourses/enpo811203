@@ -85,7 +85,7 @@
 
 [滚动优化与滚动控制](wip)
 
-# [第六篇 全线最佳实践](practiseindex)
+# [第六篇 全线实践练习](practiseindex)
 
 [环境准备](/homework/homework1)
 

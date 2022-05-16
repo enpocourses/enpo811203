@@ -1,7 +1,7 @@
-@def title = "全线最佳实践"
+@def title = "全线实践练习"
 @def tags = ["", ""]
 
-# 全线最佳实践
+# 全线实践练习
 
 [环境准备](/homework/homework1)
 
