@@ -9,6 +9,6 @@
 
 [序贯模块法与联立方程法](methods-4-simulation-solve)
 
-[数字孪生中的离散事件](discrete-events)
+[仿真中的离散事件](discrete-events)
 
 [跨领域联合仿真](co-simulation)
