@@ -1,4 +1,6 @@
+## 把计算封装成服务
 
-## unitful与单位计算
+通过http.jl和genie.jl进行
 
-## modelingtoolkit与稳态问题求解
+## restful与json
+

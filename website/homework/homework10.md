@@ -1,7 +1,3 @@
-
-## 把计算封装成服务
-
-通过http.jl和genie.jl进行
-
-## restful与json
+## 理解结构体、类、类型
+## 理解modelingtoolkit的结构
 

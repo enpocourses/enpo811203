@@ -1,12 +1,1 @@
-
-## 理解递归处理
-
-## 计算器
-
-## greet
-
-## 有理数
-
-## plasmo
-
-## 符号计算与自动微分
+## 使用differentialequations.jl 理解微分方程求解

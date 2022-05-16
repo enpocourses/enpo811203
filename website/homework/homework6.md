@@ -1,2 +1,3 @@
+## JuMP的模型跑一跑，理解建模，优化问题求解
 
-## 使用differentialequations.jl 理解微分方程求解
+## 安装一下gruobi求解器，理解接口
