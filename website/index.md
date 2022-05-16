@@ -105,6 +105,10 @@
 
 [线上仿真程序练习](/homework/homework9)
 
+[参数估计练习](/homework/homework10)
+
+[模型预测控制练习](/homework/homework11)
+
 # [第七篇 前沿专题](frontindex)
 
 [能量系统集成与超结构优化](front1-superstrucre)

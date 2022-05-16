@@ -4,6 +4,8 @@
 
 ## julia的环境
 
+## 在vscode中运行julia
 
+## 在Pluto中运行julia
 
-
+## 在jupyter中运行julia

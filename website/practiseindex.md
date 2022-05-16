@@ -20,3 +20,7 @@
 [面向对象建模练习](/homework/homework8)
 
 [线上仿真程序练习](/homework/homework9)
+
+[参数估计练习](/homework/homework10)
+
+[模型预测控制练习](/homework/homework11)
