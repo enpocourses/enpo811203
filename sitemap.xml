@@ -242,12 +242,6 @@
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://ai4energy.github.io/enpo811203/tools-prep/index.html</loc>
-    <lastmod>2022-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
     <loc>https://ai4energy.github.io/enpo811203/mpc-intro/index.html</loc>
     <lastmod>2022-05-16</lastmod>
     <changefreq>monthly</changefreq>
