@@ -11,4 +11,4 @@
 
 [其它参考资料](/references)
 
-[ModelignToolkit典型示例](https://ai4energy.github.io/LearnDocs/dev/)
+[Ai4Energy小组写的ModelignToolkit典型例子](https://ai4energy.github.io/LearnDocs/dev/)
