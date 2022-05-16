@@ -1,40 +1,7 @@
 @def title = "智慧能源系统导论"
 @def tags = ["建模", "仿真", "优化", "控制"]
 
-# [理解计算](cs4e-firstcourse)
-
-# [先让我们来说说优化](optimization-intro)
-
-# [知识可运行化—建模](modeling-intro)
-
-# [数字孪生？虚拟仿真？](simulation-intro)
-
-# [模型预测控制](mpc-intro)
-
-# [建模、仿真、优化与控制的相互关系](alltogether)
-
-# [智慧能源管理信息系统](ems-intro)
-
-# [一些典型环境的设置](tools-prep)
-
-# [另文详述的MTK文档](https://ai4energy.github.io/LearnDocs/dev/)
-
-[该文档](https://ai4energy.github.io/LearnDocs/dev/)是Ai4Energy小组在学习中整理的一些可操作案例。案例的核心主要与建模仿真优化控制相关。文档主要特点为：
-
-* 既有数学层面的探究，也包含了应用层面的案例。
-* 包含大量Julia生态中软件包的使用
-* 兼顾建模仿真优化控制核心与拓展
-* 分享对理论抽象问题的认识
-* 分享软件使用过程中的技巧
-* 分享踩坑的心路历程与对库使用的理解
-
-供大家学习参考。
-
-
-
-# [参考资料](references)
-
-# 第〇篇 绪论篇
+# [第〇篇 绪论篇](introductionindex)
 
 [智慧能源引论](introduction)
 
@@ -42,7 +9,7 @@
 
 [智慧能源管理信息系统简介](energy-management-system)
 
-# 第一篇 计算入门导引及其他相关IT知识
+# [第一篇 计算入门导引及其他相关IT知识](cs4eindex)
 
 [理解计算](cs4e-firstcourse)
 
@@ -52,7 +19,7 @@
 
 [智慧XX系统解构](stucture-of-smartsystems)
 
-# 第二篇 从优化说起
+# [第二篇 从优化说起](optimizationindex)
 
 [最优化与运筹学](optimization-intro)
 
@@ -66,7 +33,7 @@
 
 [典型的能源系统优化案例](examples-of-energyrelatedoptimization)
 
-# 第三篇 数字孪生与系统仿真
+# [第三篇 数字孪生与系统仿真](simulationindex)
 
 [仿真概述](simulation-intro)
 
@@ -74,43 +41,67 @@
 
 [序贯模块法与联立方程法](methods-4-simulation-solve)
 
-[离散事件](discrete-events)
+[数字孪生中的离散事件](discrete-events)
 
 [跨领域联合仿真](co-simulation)
 
-
-# 第四篇 分级组件化建模
-
+# [第四篇 分级组件化建模](structureindex)
 
 
-# 第五篇 先进过程控制
 
-# 第六篇 全线最佳实践
+# [第五篇 先进过程控制](controlindex)
 
-[理解计算练习]()
+# [第六篇 全线最佳实践](practiseindex)
 
-[理解云计算练习]()
+[环境准备](/homework/homework1)
 
-[理解物联网练习]()
+[理解计算练习](/homework/homework2)
 
-[优化入门练习]()
+[理解云计算练习](/homework/homework3)
 
-[仿真入门练习]()
+[理解物联网练习](/homework/homework4)
 
-[面向对象建模练习]()
+[熟悉Julia练习](/homework/homework5)
 
-# 第七篇 前沿专题
+[优化入门练习](/homework/homework6)
 
-[能量系统集成与超结构优化]()
+[仿真入门练习](/homework/homework7)
 
-[机器学习模型]()
+[面向对象建模练习](/homework/homework8)
 
-[数据驱动的代理模型]()
+[线上仿真程序练习](/homework/homework9)
 
-# 第八篇 分类参考材料
+# [第七篇 前沿专题](frontindex)
+
+[能量系统集成与超结构优化](front1-superstrucre)
+
+[机器学习模型](front2-machinelearning)
+
+[数据驱动的代理模型](front2-datadrivenmodels)
+
+# [第八篇 分类参考材料](referenceindex)
 
 [优化相关](optimization-references)
 
 [仿真相关](simulation-references)
 
 [控制相关](control-references)
+
+[其它参考资料](references)
+
+[ModelignToolkit典型示例](https://ai4energy.github.io/LearnDocs/dev/)
+
+# [第九篇 不是最后的最后](sumarry)
+
+[建模、仿真、优化与控制的相互关系](alltogether-in-digital-twins)
+
+<!-- 
+
+# [知识可运行化—建模](modeling-intro)
+
+# [数字孪生？虚拟仿真？](simulation-intro)
+
+# [模型预测控制](mpc-intro)
+
+
+ -->
