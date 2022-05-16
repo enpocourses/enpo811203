@@ -75,6 +75,16 @@
 
 # [第五篇 先进过程控制](controlindex)
 
+[模型预测控制概述](mpc-intro)
+
+[参数估计与模型校准](wip)
+
+[模型辨识](wip)
+
+[数据驱动模型](wip)
+
+[滚动优化与滚动控制](wip)
+
 # [第六篇 全线最佳实践](practiseindex)
 
 [环境准备](/homework/homework1)
