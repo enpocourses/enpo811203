@@ -14,19 +14,43 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://ai4energy.github.io/enpo811203/stucture-of-smartsystem/index.html</loc>
+    <lastmod>2022-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://ai4energy.github.io/enpo811203/index.html</loc>
     <lastmod>2022-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://ai4energy.github.io/enpo811203/cs4e-guide/index.html</loc>
+    <loc>https://ai4energy.github.io/enpo811203/internet-of-things/index.html</loc>
+    <lastmod>2022-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/introduction/index.html</loc>
+    <lastmod>2022-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/cloud-computing/index.html</loc>
     <lastmod>2022-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://ai4energy.github.io/enpo811203/alltogether/index.html</loc>
+    <lastmod>2022-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://ai4energy.github.io/enpo811203/cs4e-firstcourse/index.html</loc>
     <lastmod>2022-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -68,13 +92,19 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://ai4energy.github.io/enpo811203/energy-management-system/index.html</loc>
+    <lastmod>2022-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://ai4energy.github.io/enpo811203/references/index.html</loc>
     <lastmod>2022-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://ai4energy.github.io/enpo811203/cloud-intro/index.html</loc>
+    <loc>https://ai4energy.github.io/enpo811203/energy-system-engineering/index.html</loc>
     <lastmod>2022-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
