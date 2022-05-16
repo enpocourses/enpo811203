@@ -129,6 +129,8 @@
 
 [建模、仿真、优化与控制的相互关系](alltogether-in-digital-twins)
 
+[前进的方向](nextstep)
+
 <!-- 
 
 # [知识可运行化—建模](modeling-intro)
