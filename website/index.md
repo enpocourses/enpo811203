@@ -1,7 +1,7 @@
 @def title = "智慧能源系统导论"
 @def tags = ["建模", "仿真", "优化", "控制"]
 
-# [适用于工科的计算入门导引](cs4e-guide)
+# [理解计算](cs4e-firstcourse)
 
 # [先让我们来说说优化](optimization-intro)
 

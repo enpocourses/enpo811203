@@ -1,7 +1,9 @@
-@def title = "适用于工科的计算入门导引"
+@def title = "理解计算"
 @def tags = ["compter science", "guide"]
 
-# 适用于工科的计算入门导引
+# 理解计算
+
+\tableofcontents
 
 伴随着物联网、大数据、云计算及三维可视化等技术的发展，在“碳达峰、碳中和”双碳目标驱动下，传统工业领域数字化、智能化已经成为第四次工业革命的重要方向之一，这也是中国制造2025的主攻方向。
 
@@ -13,7 +15,7 @@
 
 接下来，我们会从函数、递归、模型处理、抽象等几个方面进行介绍。
 
-## 函数
+## 从函数说起
 
 有很多人说，计算机入门最合适的捷径就是编程。很多人的编程是从c语言开始的，一开始就陷入了scanf/printf的格式化输入/输出里去。而我们这里高度概括的来讲讲。
 
@@ -231,6 +233,8 @@ end
 因为计算机是机械化的信息处理，所以最初只能按确定的形式接受。但是人们通过一些办法实现了对人更友好，就可以处理一页一页交过来我能处理，一册一册叫过来我也能处理。某种意义上讲，这就是一种多态。
 
 Julia语言中通过对同一个函数名写不同的处理方法来实现。而c++通过参数形式的不同实现不同的具体的函数，来处理多态问题。这个我们暂时不去深究。
+
+### 函数的集合构成库
 
 - **函数可以封装成库给别人调用，有动态库，有静态库**
 我们写函数的本质是把具有一定功能性代码整合起来，可以重复的使用。至于函数内部的实现，你可以认为就是一个黑箱。但是我得告诉你我有什么功能。就像快递收发点一样，怎么运输的你不用管，但是我得有个目录告诉你有些什么选择和对应的收费标准。
@@ -470,13 +474,14 @@ julia>
 
 关于闭包，更多的可以看看这个，[Lisp 已死，Lisp 万岁！](http://www.yinwang.org/blog-cn/2013/03/26/lisp-dead-alive) 或者yuziwen的[PL教程 第一章 人和机器](https://yuziwen.github.io/pl-tutorial-1.html), “习题：找规律”之前的那一部分内容。
 
+### 由函数构成服务
 - **事件驱动与死循环，服务程序**
 
 我们初学编程的时候，老师给我们说，不要写死循环。是的，那时候电脑就给你个黑屏，死循环无法退出，机子就只好重启了。
 
 可是，真的不能写死循环吗？以下来自<https://github.com/APMonitor/arduino/blob/master/0_Test_Device/Python/tclab_v2/tclab_v2.ino>，是一个温度控制小实验板上的程序，arduino上运行的。复制这么长的代码不利于阅读，但是为了完整性，我们还是都贴过来。
 
-```
+```c
 
 #include "Arduino.h"
 
@@ -764,7 +769,7 @@ void loop() {
 ```
 
 arduino是个单片机。最后一个函数，就相当于是主程序，就是个死循环。
-```
+```c
 void loop() {
   readCommand();
   if (DEBUG) echoCommand();
@@ -791,7 +796,7 @@ void loop() {
 - 动态类型语言与静态类型语言，及它们的互相靠拢
 python的类型提示
 
-## 模型与符号
+## 符号与模型
 
 - 从符号到模型与parser
 
@@ -857,7 +862,7 @@ make install
 
 对c/cpp/fortran系列来说，jetbrains出品的CLion堪称利器。（jetbrains的工具，学术免费，开源开发免费。）
 
-## 递归
+## 递归思想与“事物”的结构
 
 - 斐波拉契数列与递归
 
@@ -865,7 +870,7 @@ make install
 
 - 四则混合运算、表达式树与递归
 
-## 交互式编程与解释器
+## 解释器给我们的启示与对模型的处理
 
 我们提交一个Add 3 4
 
@@ -897,13 +902,16 @@ julia的参数类型
 
 - 名字空间
 
-## 图形界面与低代码开发
-- 从gcc、gdb到IDE
+- 硬件的一层又一层抽象
+由晶体管构建了门电路，由门电路构建了加法器、寄存器、锁存器，进一步构建了更上层的功能模块。设计cpu的时候，不是在晶体管层面设计的，但是一定有“编译器”一样的东西给打版到能生产的级别上去。这就是硬件的一层又一层抽象。
 
-- 儿童编程Scratch与背后的code
-- 从delphi、C#、QT到浏览器
+- 软件的一层又一层抽象
 
+从机器码构建了汇编码，从汇编码构建了c语言这样的高级语言。你使用c这样的高级语言写程序，通常不需要管背后的汇编是怎么回事，更不用管机器码了。这就是一层抽象。基于c可以构建更高级的语言，更加用户友好或者安全。
 
+别人的库，也是一层抽象，你在扫码的时候，并不需要知道在0101层面是怎么工作的。
+
+关于计算机科学入门，这里有一个[大约5小时的40集课程](https://www.bilibili.com/video/BV1EW411u7th?spm_id_from=333.337.search-card.all.click)，可以快速的看一遍。
 
 ## 如何进行进一步学习
 - 学习一门编程语言，掌握关键语言特性，忽略次要特性
@@ -918,18 +926,6 @@ julia的参数类型
 
 - 搜索引擎、github
 
-## 再看抽象与封装
-- 硬件的一层又一层抽象
-由晶体管构建了门电路，由门电路构建了加法器、寄存器、锁存器，进一步构建了更上层的功能模块。设计cpu的时候，不是在晶体管层面设计的，但是一定有“编译器”一样的东西给打版到能生产的级别上去。这就是硬件的一层又一层抽象。
-
-- 软件的一层又一层抽象
-
-从机器码构建了汇编码，从汇编码构建了c语言这样的高级语言。你使用c这样的高级语言写程序，通常不需要管背后的汇编是怎么回事，更不用管机器码了。这就是一层抽象。基于c可以构建更高级的语言，更加用户友好或者安全。
-
-别人的库，也是一层抽象，你在扫码的时候，并不需要知道在0101层面是怎么工作的。
-
-关于计算机科学入门，这里有一个[大约5小时的40集课程](https://www.bilibili.com/video/BV1EW411u7th?spm_id_from=333.337.search-card.all.click)，可以快速的看一遍。
-
 - 对用户友好与对机器友好
 从0101到汇编到c，再到今天的高级语言，从javascript到typescript，这些都是越来越用户友好，而非机器友好。
 
@@ -941,7 +937,7 @@ julia的参数类型
 
 - 站在巨人的肩膀上
 
-## 不是最后的最后
+- 不是最后的最后
 
 吾生也有涯，而知也无涯，以有涯随无涯，殆已！学会所有知识，既不可能也不必要。人要学会的是迁移性的能力。
 
@@ -953,33 +949,39 @@ julia的参数类型
 
 前进的方法：实践、认识、再实践、再认识
 
-## 参考资料
+## 释疑与参考材料
 
-### [make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)
+**图形界面**
+- 从gcc、gdb到IDE
+
+- 儿童编程Scratch与背后的code
+- 从delphi、C#、QT到浏览器
+
+ [make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)
 [make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)，这个不要看太多，理解了程序编译过程，makefile描述的是依赖关系和生成规则，操作一下就ok了。
 
-### [yuziwen的博客](https://yuziwen.github.io/)
+ [yuziwen的博客](https://yuziwen.github.io/)
 [yuziwen的博客](https://yuziwen.github.io/)，初学的看一看，理解一下函数、递归和结构体。
 
-### [王垠的博客](http://www.yinwang.org/)
+ [王垠的博客](http://www.yinwang.org/)
 [王垠的博客](http://www.yinwang.org/),很多都可以读一读，尤其是《解谜计算机科学》、《怎样写一个解释器》、《如何掌握所有的语言》，还有《对 Parser 的误解》、《Lisp 已死，Lisp 万岁！》。
 
 
 
-### [sicp](https://mitpress.mit.edu/sites/default/files/sicp/index.html)
+ [sicp](https://mitpress.mit.edu/sites/default/files/sicp/index.html)
 
 [sicp](https://mitpress.mit.edu/sites/default/files/sicp/index.html)就是大名鼎鼎的sicp。老实说，我没有看完。大体理解过程抽象（就是函数）、数据抽象（就是结构体、类）就差不多了，最多再理解到复数计算、自动求导计算差不多了。有中文版。
 
-### [sicp-js](https://sourceacademy.org/sicpjs)
+ [sicp-js](https://sourceacademy.org/sicpjs)
 [sicp-js](https://sourceacademy.org/sicpjs)是javascript版的sicp，新加坡国立大学一名教教授干的。好处是使用javascript实现，直接在网页上就能运行。其实用javascript入门编程就是好，环境啥的都不用装，有个Chrome，按一下F12就什么都有了。
 
-### [htdp](https://htdp.org/)
+ [htdp](https://htdp.org/)
 [htdp](https://htdp.org/)是经典编程入门书之一，scheme语言的，写得很细。
 
-### [让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)
+ [让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)
 [让我们谈谈lambda演算](https://github.com/txyyss/Lambda-Calculus)是王盛颐写的介绍lambda演算的。一般而言，并不需要深入去理解。
 
-### [lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html) 
+ [lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html) 
 [lisp的本质](https://www.cnblogs.com/jxcia_Lai/archive/2012/10/29/2744226.html)我不知道中文的原文最早出现在哪里，这是其英文原文<https://www.defmacro.org/ramblings/lisp.html>。恐怕学了java才看得懂，看不懂也不影响啥。
 
 以上这些书和链接，不用全看，不然就真的回不来了。理解核心要义。而这个要义就在《解谜计算机科学》，在《计算机科学基础班（第三期）报名》的课程大纲里，在《怎样写一个解释器》里。
