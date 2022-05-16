@@ -45,8 +45,6 @@ EnergyPlus和openstudio
 3. [APMonitor](http://apmonitor.com/)
 4. [Greet](https://greet.es.anl.gov/)
 5. [Mqtt系列教程](https://www.hangge.com/blog/cache/detail_2347.html)
-6. [Mixed Integer Distributed Ant Colony Optimization(midaco-solver)](http://www.midaco-solver.com/)
-
 
 <!-- 
 AnyMOD.jl
