@@ -7,7 +7,7 @@
 
 [优化问题分类及其求解算法](/classification-optimization)
 
-[优化建模语言与平台](language-4-optimization)
+[优化建模语言与平台](/language-4-optimization)
 
 [优化问题的启发式算法](/metaheuristics-optimization)
 
