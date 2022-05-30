@@ -1,15 +1,15 @@
-@def title = "LearnDocs"
+@def title = "MTKDocs"
 
-# LearnDocs
+# MTKDocs
 
 !!! tip  
-    [文档连接，持续更新中......](https://ai4energy.github.io/LearnDocs/dev/)
+    [文档连接，持续更新中......](https://ai4energy.github.io/MTKDocs/dev/)
 
-    [更新中主站](https://jake484.github.io/LearnDocs/dev/)
+    [更新中主站](https://jake484.github.io/MTKDocs/dev/)
 
-## LearnDocs简介
+## MTKDocs
 
-LearnDocs是Ai4小组在学习中整理的一些可操作案例。案例的核心主要与建模仿真优化控制相关。文档主要特点为：
+MTKDocs是Ai4Energy小组在学习中整理的一些可操作案例。案例的核心主要与建模仿真优化控制相关。文档主要特点为：
 
 * 既有数学层面的探究，也包含了应用层面的案例。
 * 包含大量Julia生态中软件包的使用
