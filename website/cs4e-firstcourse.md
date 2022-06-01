@@ -937,7 +937,7 @@ julia的参数类型
 - 从delphi、C#、QT到浏览器
 
  [make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)
-[make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)，这个不要看太多，理解了程序编译过程，makefile描述的是依赖关系和生成规则，操作一下就ok了。
+[make和makefile介绍](https://seisman.github.io/how-to-write-makefile/)，这个不要看太多，理解程序编译过程，makefile描述的是依赖关系和生成规则，操作一下就ok了。
 
  [yuziwen的博客](https://yuziwen.github.io/)
 [yuziwen的博客](https://yuziwen.github.io/)，初学的看一看，理解一下函数、递归和结构体。
