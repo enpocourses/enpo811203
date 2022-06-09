@@ -11,4 +11,4 @@
 
 [其它参考资料](/references)
 
-[Ai4Energy小组写的ModelignToolkit典型例子](https://ai4energy.github.io/MTKDocs/dev/)
+[Ai4Energy小组写的ModelignToolkit典型例子](https://ai4energy.github.io/Ai4Docs/dev/)
