@@ -1,15 +1,15 @@
-@def title = "Ai4Docs"
+@def title = "Ai4EDocs"
 
-# Ai4Docs
+# Ai4EDocs
 
 !!! tip  
-    [文档连接，持续更新中......](https://ai4energy.github.io/Ai4Docs/dev/)
+    [文档连接，持续更新中......](https://ai4energy.github.io/Ai4EDocs/dev/)
 
-    [更新中主站](https://jake484.github.io/Ai4Docs/dev/)
+    [更新中主站](https://jake484.github.io/Ai4EDocs/dev/)
 
-## Ai4Docs
+## Ai4EDocs
 
-Ai4Docs是Ai4Energy小组在学习中整理的一些可操作案例。案例的核心主要与建模仿真优化控制相关。文档主要特点为：
+Ai4EDocs是Ai4Energy小组在学习中整理的一些可操作案例。案例的核心主要与建模仿真优化控制相关。文档主要特点为：
 
 * 既有数学层面的探究，也包含了应用层面的案例。
 * 包含大量Julia生态中软件包的使用
