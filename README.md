@@ -3,4 +3,4 @@
 
 **实践性智慧能源教学探索**
 
-请点击 https://ai4energy.github.io/enpo811203/ 查看。
+请点击 https://enpocourses.github.io/enpo811203/ 查看。
