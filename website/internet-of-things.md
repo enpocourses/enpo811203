@@ -23,4 +23,4 @@ mqtt是个消息服务器。它是一个运行在服务器上的守护程序，�
 
 比如我们数据采集仪采集的是室内温度，发布主题temperature-of-room-A。而数据客户端订阅了这个主题，就可以获得相应的数据，然后它可以按照自己的格式存储在相应的数据库中。
 
-理解这个过程最好的办法就是按照mqtt的教程走一遍。可以参考如下链接：[MQTT系列教程1（基本概念介绍）](https://www.hangge.com/blog/cache/detail_2347.html)，[MQTT系列教程2（消息服务器EMQ的搭建和使用）](https://www.hangge.com/blog/cache/detail_2348.html) ,[MQTT系列教程3（客户端工具MQTTBox的安装和使用）](https://www.hangge.com/blog/cache/detail_2350.html)。
+理解这个过程最好的办法就是按照mqtt的教程走一遍。可以参考如下链接：[MQTT系列教程1（基本概念介绍）](https://www.hangge.com/blog/cache/detail_2347.html)，[MQTT系列教程2（消息服务器EMQ的搭建和使用）](https://www.hangge.com/blog/cache/detail_2348.html) ，[MQTT系列教程3（客户端工具MQTTBox的安装和使用）](https://www.hangge.com/blog/cache/detail_2350.html)。
