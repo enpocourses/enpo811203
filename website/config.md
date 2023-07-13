@@ -1,12 +1,12 @@
 <!--
 Add here global page variables to use throughout your website.
 -->
-@def website_title = "智慧能源系统导论"
-@def website_descr = "综合能源系统建模、仿真、优化与控制课程网站"
+@def website_title = "智慧能源：从概念到实践"
+@def website_descr = "智慧能源：从概念到实践课程网站"
 @def website_url   = "https://ai4energy.github.io/enpo811203/"
-@def title         = "智慧能源系统导论"
+@def title         = "智慧能源：从概念到实践"
 @def prepath       = "enpo811203"
-@def description = """综合能源系统建模、仿真、优化与控制课程网站"""
+@def description = """智慧能源：从概念到实践"""
 @def author        = "Mingtao Li"
 @def mintoclevel   = 2
 @def ignore = ["node_modules/", "franklin", "franklin.pub"]
